@@ -1,0 +1,291 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap');
+
+/* ═══════════════════════════════════════════
+   TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --primary:      #465fff;
+  --primary-light:#eef2ff;
+  --primary-dark: #3651e8;
+
+  --bg:        #f4f6fc;
+  --surface:   #ffffff;
+  --border:    #e8eaf0;
+  --border-2:  #d1d5db;
+
+  --t1: #1a2035;
+  --t2: #4b5563;
+  --t3: #9ca3af;
+  --t4: #d1d5db;
+
+  --success:   #12b76a;
+  --danger:    #f04438;
+  --warning:   #f59e0b;
+  --info:      #06b6d4;
+
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.05);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.1),  0 2px 8px rgba(0,0,0,0.06);
+
+  --radius-sm: 8px;
+  --radius:    12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+}
+
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, #root { width: 100%; height: 100%; overflow: hidden; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: var(--bg);
+  color: var(--t1);
+}
+
+/* ═══════════════════════════════════════════
+   SCROLLBAR
+═══════════════════════════════════════════ */
+.scr { scrollbar-width: thin; scrollbar-color: #e5e7eb transparent; }
+.scr::-webkit-scrollbar { width: 4px; }
+.scr::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 99px; }
+
+/* ═══════════════════════════════════════════
+   TRANSITIONS
+═══════════════════════════════════════════ */
+* { transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease; }
+svg, img, canvas { transition: none !important; }
+
+/* ═══════════════════════════════════════════
+   LAYOUT SHELL
+═══════════════════════════════════════════ */
+.shell { display: flex; height: 100vh; overflow: hidden; background: var(--bg); }
+
+/* ═══════════════════════════════════════════
+   SIDEBAR
+═══════════════════════════════════════════ */
+.sidebar {
+  display: flex; flex-direction: column; flex-shrink: 0;
+  height: 100vh; background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow: hidden; position: relative;
+  transition: width 0.28s cubic-bezier(0.4,0,0.2,1) !important;
+}
+
+/* ── Nav item ── */
+.nv {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; padding: 9px 12px; border-radius: var(--radius-sm);
+  border: none; cursor: pointer; font-size: 13.5px; font-weight: 500;
+  font-family: inherit; text-align: left; white-space: nowrap;
+  overflow: hidden; background: transparent; color: var(--t2);
+  transition: background 0.12s ease, color 0.12s ease !important;
+}
+.nv:hover { background: var(--bg); color: var(--t1); }
+.nv.active { background: var(--primary-light); color: var(--primary); font-weight: 600; }
+.nv .icon-wrap {
+  display: flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; flex-shrink: 0;
+}
+
+/* ── Section label ── */
+.sec-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--t3);
+  padding: 0 12px; margin: 16px 0 4px;
+}
+
+/* ═══════════════════════════════════════════
+   TOPBAR
+═══════════════════════════════════════════ */
+.topbar {
+  display: flex; align-items: center;
+  height: 64px; padding: 0 24px;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  flex-shrink: 0; gap: 16px; position: relative; z-index: 10;
+}
+
+/* ═══════════════════════════════════════════
+   CARD
+═══════════════════════════════════════════ */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease !important;
+}
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* ═══════════════════════════════════════════
+   BADGE
+═══════════════════════════════════════════ */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 2px 8px; border-radius: 99px;
+  font-size: 11px; font-weight: 600; white-space: nowrap;
+}
+.badge-new {
+  background: #e0f2fe; color: #0284c7;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.05em;
+  padding: 2px 6px; border-radius: 4px;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════════
+   STATUS DELTA
+═══════════════════════════════════════════ */
+.delta-up   { color: var(--success); font-size: 12px; font-weight: 600; }
+.delta-down { color: var(--danger);  font-size: 12px; font-weight: 600; }
+
+/* ═══════════════════════════════════════════
+   SEARCH BAR
+═══════════════════════════════════════════ */
+.search-wrap {
+  display: flex; align-items: center; gap: 10px;
+  flex: 1; max-width: 480px; margin: 0 auto;
+  height: 40px; padding: 0 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease !important;
+}
+.search-wrap:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(70,95,255,0.12);
+  background: var(--surface);
+}
+.search-wrap input {
+  flex: 1; background: transparent; border: none; outline: none;
+  font-family: inherit; font-size: 13.5px; color: var(--t1);
+}
+.search-wrap input::placeholder { color: var(--t3); }
+
+/* ═══════════════════════════════════════════
+   KBD
+═══════════════════════════════════════════ */
+kbd {
+  display: inline-flex; align-items: center; gap: 2px;
+  padding: 2px 8px; border-radius: 6px; font-size: 11px;
+  font-family: monospace; font-weight: 600;
+  background: var(--surface); color: var(--t3);
+  border: 1px solid var(--border-2); flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════
+   ICON BUTTON
+═══════════════════════════════════════════ */
+.ibtn {
+  display: flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border); background: var(--surface);
+  cursor: pointer; color: var(--t2); position: relative;
+  transition: background 0.12s, border-color 0.12s, color 0.12s !important;
+  flex-shrink: 0;
+}
+.ibtn:hover { background: var(--bg); color: var(--t1); border-color: var(--border-2); }
+
+/* ═══════════════════════════════════════════
+   SIDEBAR PROMO CARD
+═══════════════════════════════════════════ */
+.promo-card {
+  margin: 12px; border-radius: var(--radius);
+  background: var(--bg); border: 1px solid var(--border);
+  padding: 16px; text-align: center;
+}
+
+/* ═══════════════════════════════════════════
+   PRIMARY BUTTON
+═══════════════════════════════════════════ */
+.btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 9px 20px; border-radius: var(--radius-sm);
+  background: var(--primary); color: #fff;
+  font-family: inherit; font-size: 13px; font-weight: 600;
+  border: none; cursor: pointer;
+  transition: background 0.15s, transform 0.12s, box-shadow 0.15s !important;
+  box-shadow: 0 4px 12px rgba(70,95,255,0.35);
+}
+.btn-primary:hover {
+  background: var(--primary-dark);
+  box-shadow: 0 6px 20px rgba(70,95,255,0.45);
+  transform: translateY(-1px);
+}
+
+/* ═══════════════════════════════════════════
+   TABLE ROWS
+═══════════════════════════════════════════ */
+.trow { transition: background 0.1s ease !important; }
+.trow:hover td { background: var(--bg); }
+
+/* ═══════════════════════════════════════════
+   GAUGE / DONUT
+═══════════════════════════════════════════ */
+.gauge-wrap { display: flex; flex-direction: column; align-items: center; }
+
+/* ═══════════════════════════════════════════
+   TOGGLE (theme)
+═══════════════════════════════════════════ */
+.tog {
+  position: relative; width: 44px; height: 24px;
+  border-radius: 99px; border: 1px solid var(--border-2);
+  cursor: pointer; padding: 0; background: var(--bg);
+  transition: background 0.25s !important;
+}
+.tog.on { background: var(--primary); border-color: var(--primary); }
+.tog-k {
+  position: absolute; top: 2px; width: 18px; height: 18px;
+  border-radius: 50%; background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  transition: left 0.28s cubic-bezier(0.34,1.56,0.64,1) !important;
+}
+.tog-k.off { left: 2px; }
+.tog-k.on  { left: 22px; }
+
+/* ═══════════════════════════════════════════
+   AVATAR
+═══════════════════════════════════════════ */
+.avatar {
+  border-radius: 50%; overflow: hidden; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--primary), #7c3aed);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-weight: 700; font-size: 12px;
+}
+
+/* ═══════════════════════════════════════════
+   STAT ICON BOX
+═══════════════════════════════════════════ */
+.stat-icon {
+  width: 52px; height: 52px; border-radius: var(--radius);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ═══════════════════════════════════════════
+   NAV COLLAPSE INDICATOR
+═══════════════════════════════════════════ */
+.chev {
+  margin-left: auto; flex-shrink: 0;
+  transition: transform 0.22s ease !important;
+}
+.chev.open { transform: rotate(180deg); }
+
+/* ═══════════════════════════════════════════
+   ACTIVITY DOT LINE
+═══════════════════════════════════════════ */
+.aline {
+  position: absolute; left: 3px; top: 16px; bottom: -20px;
+  width: 1px; background: var(--border);
+}
