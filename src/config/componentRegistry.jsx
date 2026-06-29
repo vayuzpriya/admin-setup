@@ -2,7 +2,7 @@ import Button from "../components/button";
 import Input from "../components/input";
 import Card from "../components/glassCard";
 import Typography from "../components/typography";
-
+import Loader from "../components/loader";
 export const componentRegistry = {
     button: {
         title: "Button",
@@ -42,11 +42,48 @@ export const componentRegistry = {
 
 </Card>`,
   },
- loader: {
-    title: "Loader",
-    preview: <div>Coming Soon...</div>,
-    code: `<Loader />`,
-  },
+loader: {
+  title: "Loader",
+
+  preview: (
+    <div className="space-y-10">
+
+      {/* Sizes */}
+      <div>
+        <h3 className="mb-6 text-xl font-semibold text-white">
+          Loader Sizes
+        </h3>
+
+        <div className="flex items-center gap-10">
+          <Loader size="sm" />
+          <Loader size="md" />
+          <Loader size="lg" />
+        </div>
+      </div>
+
+      {/* Colors */}
+      <div>
+        <h3 className="mb-6 text-xl font-semibold text-white">
+          Loader Colors
+        </h3>
+
+        <div className="flex items-center gap-10">
+          <Loader color="violet" />
+          <Loader color="cyan" />
+          <Loader color="green" />
+          <Loader color="red" />
+          <Loader color="white" />
+        </div>
+      </div>
+
+    </div>
+  ),
+
+  code: `<Loader
+  size="md"
+  color="violet"
+/>`,
+},
   text: {
   title: "Typography",
 

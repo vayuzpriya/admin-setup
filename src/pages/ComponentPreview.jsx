@@ -17,7 +17,7 @@ function ComponentPreview() {
 
   return (
     <div className="text-white">
-      <h1>{component.title}</h1>
+      {/* <h1>{component.title}</h1> */}
 
       {component.preview}
     </div>
