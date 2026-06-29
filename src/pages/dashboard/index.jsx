@@ -4,7 +4,7 @@ import Button from "../../components/button";
 
 import LineChart from "./charts/LineChart";
 import PieChart from "./charts/pieChart";
-
+import Card from "../../components/Card";
 function Dashboard() {
   const navigate = useNavigate();
 
@@ -55,19 +55,23 @@ function Dashboard() {
 
 </header>
 
-      <div className="grid gap-8 lg:grid-cols-2">
+     <div className="grid gap-8 lg:grid-cols-2">
 
-        {/* Line Chart */}
-        <div className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
-          <LineChart />
-        </div>
+    <Card
+        title="Monthly Revenue"
+        subtitle="Revenue generated in the last 7 months"
+    >
+        <LineChart />
+    </Card>
 
-        {/* Pie Chart */}
-        <div className="rounded-3xl border border-slate-800 bg-slate-900 p-8 shadow-xl">
-          <PieChart />
-        </div>
+    <Card
+        title="Project Status"
+        subtitle="Current project distribution"
+    >
+        <PieChart />
+    </Card>
 
-      </div>
+</div>
     </div>
   );
 }
