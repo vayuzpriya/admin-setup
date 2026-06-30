@@ -7,12 +7,24 @@ function Input({
   value,
   onChange,
   name,
+  disabled = false,
+  required = false,
+  error = "",
+  success = "",
+  helperText = "",
 }) {
+  const borderStyle = error
+    ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
+    : success
+    ? "border-emerald-500 focus:border-emerald-500 focus:ring-emerald-500/20"
+    : "border-slate-700 focus:border-violet-500 focus:ring-violet-500/20";
+
   return (
-    <div>
+    <div className="space-y-2">
       {label && (
-        <label className="block text-sm text-slate-300 mb-2">
+        <label className="block text-sm font-medium text-slate-300">
           {label}
+          {required && <span className="ml-1 text-red-500">*</span>}
         </label>
       )}
 
@@ -22,10 +34,33 @@ function Input({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className="w-full rounded-xl border border-slate-700 bg-slate-900 px-5 py-4 text-white placeholder-slate-500 outline-none transition-all duration-300 focus:border-violet-500 focus:ring-4 focus:ring-violet-500/20"
+        disabled={disabled}
+        className={`
+          w-full rounded-xl border
+          px-5 py-4
+          bg-slate-900
+          text-white
+          placeholder-slate-500
+          outline-none
+          transition-all
+          duration-300
+          focus:ring-4
+          ${borderStyle}
+          disabled:cursor-not-allowed
+          disabled:opacity-50
+        `}
       />
+
+      {error ? (
+        <p className="text-sm text-red-400">{error}</p>
+      ) : success ? (
+        <p className="text-sm text-emerald-400">{success}</p>
+      ) : (
+        helperText && (
+          <p className="text-sm text-slate-400">{helperText}</p>
+        )
+      )}
     </div>
   );
 }
-
 export default Input;
