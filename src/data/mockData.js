@@ -1,0 +1,81 @@
+export const initialUsers = [
+  {
+    id: 1,
+    name: 'Olivia Vance',
+    email: 'olivia.vance@gmail.com',
+    role: 'Senior Frontend Lead',
+    status: 'Offered',
+    joinDate: '2026-06-15',
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256',
+  },
+  {
+    id: 2,
+    name: 'Marcus Chen',
+    email: 'marcus.chen@outlook.com',
+    role: 'Technical Product Manager',
+    status: 'Interviewing',
+    joinDate: '2026-06-22',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=256',
+  },
+  {
+    id: 3,
+    name: 'Sophia Rodriguez',
+    email: 'sophia.rod@yahoo.com',
+    role: 'Staff Backend Architect',
+    status: 'Applied',
+    joinDate: '2026-06-25',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=256',
+  },
+  {
+    id: 4,
+    name: 'Ethan Patel',
+    email: 'ethan.p@gmail.com',
+    role: 'Cloud Operations Lead',
+    status: 'Applied',
+    joinDate: '2026-07-01',
+    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=256',
+  },
+  {
+    id: 5,
+    name: 'Emma Larson',
+    email: 'emma.larson@design.co',
+    role: 'Principal UX Researcher',
+    status: 'Rejected',
+    joinDate: '2026-06-18',
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=256',
+  },
+  {
+    id: 6,
+    name: 'Liam Vance',
+    email: 'liam.vance@dev.com',
+    role: 'React Native Developer',
+    status: 'Interviewing',
+    joinDate: '2026-06-29',
+    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=256',
+  },
+  {
+    id: 7,
+    name: 'Aria Takahashi',
+    email: 'aria.taka@sec-eng.org',
+    role: 'Senior Security Specialist',
+    status: 'Offered',
+    joinDate: '2026-06-20',
+    avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=256',
+  },
+];
+
+export const databaseMetrics = [
+  { id: 'ch-1', host: 'api.linkedin.com/v2/sourcing', engine: 'LinkedIn Sourcing API', cpu: '12%', memory: '24ms latency', status: 'Active', connections: 1420 },
+  { id: 'ch-2', host: 'api.greenhouse.io/v1/sync', engine: 'Greenhouse Webhook Sync', cpu: '4%', memory: '48ms latency', status: 'Active', connections: 850 },
+  { id: 'ch-3', host: 'indeed.com/partner/xml-feed', engine: 'Indeed XML Job Feed', cpu: '22%', memory: '110ms latency', status: 'Active', connections: 342 },
+  { id: 'ch-4', host: 'internal-ats.company.local', engine: 'Internal Referral DB', cpu: '1%', memory: '8ms latency', status: 'Active', connections: 110 },
+  { id: 'ch-5', host: 'api.ziprecruiter.com/v3', engine: 'ZipRecruiter Partner Feed', cpu: '0%', memory: 'Disconnected', status: 'Suspended', connections: 0 },
+];
+
+export const databaseLogs = [
+  { timestamp: '14:52:10.820', type: 'info', message: 'Successfully parsed resume for Olivia Vance: extracted 12 skills.' },
+  { timestamp: '14:50:35.104', type: 'info', message: 'Greenhouse webhook sync triggered. Updated 12 candidate records.' },
+  { timestamp: '14:48:12.441', type: 'warning', message: 'Indeed XML feed latency exceeded 100ms. Re-establishing connection pool.' },
+  { timestamp: '14:42:01.009', type: 'error', message: 'LinkedIn API request failed with status code 429: Rate limit exceeded. Backing off for 120s.' },
+  { timestamp: '14:35:55.922', type: 'info', message: 'Interview slot confirmed: Marcus Chen on July 5th, 10:00 AM PST.' },
+];
