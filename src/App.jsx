@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './index.css'
+import { Component as LoginPage } from '@/components/ui/animated-characters-login-page'
 
 /* ─── Icons ─── */
 const Ic = {
@@ -721,8 +722,13 @@ function DashboardPage(){
    ROOT APP
 ════════════════════════════════ */
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [page,  setPage]  = useState('dashboard')
   const [sOpen, setSOpen] = useState(true)
+
+  if (!isAuthenticated) {
+    return <LoginPage onLoginSuccess={() => setIsAuthenticated(true)} />
+  }
 
   const NAV = [
     { id:'dashboard', label:'Dashboard', icon: Ic.grid },
