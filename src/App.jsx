@@ -328,10 +328,10 @@ export default function App() {
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                   <h1 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight mb-1.5">
-                    User Management (Candidates)
+                    Staff Management
                   </h1>
                   <p className="text-sm text-[var(--text-muted)]">
-                    Manage applicant profiles, interview stages, and target job postings using full search, filters, and tables.
+                    Manage staff profiles, roles, and permissions using full search, filters, and tables.
                   </p>
                 </div>
                 <Button
@@ -340,7 +340,7 @@ export default function App() {
                   onClick={handleAddNewUser}
                   className="shadow-sm shadow-[var(--color-orange-shadow)]"
                 >
-                  Add Candidate
+                  Add Staff Member
                 </Button>
               </div>
 
@@ -599,7 +599,7 @@ export default function App() {
                     </p>
                     <div className="bg-[var(--bg-surface-2)] p-3 rounded-xl border border-[var(--border-color)]">
                       <code className="text-xs text-[var(--text-primary)]">
-                        {`import Button from './components/common/Button';\n\n<Button variant="primary">Add Candidate</Button>`}
+                        {`import Button from './components/common/Button';\n\n<Button variant="primary">Add Organization</Button>`}
                       </code>
                     </div>
                   </CardBody>

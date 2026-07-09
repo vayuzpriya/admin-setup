@@ -6,7 +6,7 @@
 /* ── THEME TOKENS (Mirrored from event.css) ── */
 
 [data-theme="dark"],
-[data-theme="vayuzsocial-dark"] {
+[data-theme="rex-dark"] {
   --color-primary: #f97316;
   --color-primary-dark: #ea6c0a;
   --color-primary-hover: #f68b2d;

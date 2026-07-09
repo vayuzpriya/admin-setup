@@ -19,6 +19,7 @@ export default function Button({
     outline: 'border border-[var(--border-color)] hover:bg-[var(--bg-hover)] text-[var(--text-secondary)]',
     ghost: 'hover:bg-[var(--bg-hover)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]',
     danger: 'bg-[var(--color-danger)] hover:bg-[var(--color-danger-dark)] text-white shadow-sm focus:ring-[var(--color-danger)]',
+    inverse: 'bg-white hover:bg-white/90 text-[var(--color-primary)] shadow-sm',
   };
 
   const sizes = {

@@ -10,7 +10,7 @@
 
    Sections:
      1.  Scrollbar reset
-     2.  Theme aliases (vayuzsocial-dark / vayuzsocial-light)
+     2.  Theme aliases (rex-dark / vayuzsocial-light)
      3.  Light theme tokens  (:root)
      4.  Dark theme tokens   ([data-theme="dark"])
      5.  Base input / form styles
@@ -52,10 +52,10 @@ input[type="time"]::-webkit-clear-button {
 
 /* ────────────────────────────────────────────────────────────────────────────
    2. THEME ALIASES
-   Maps vayuzsocial-dark / vayuzsocial-light onto the canonical selectors.
+   Maps rex-dark / vayuzsocial-light onto the canonical selectors.
    ──────────────────────────────────────────────────────────────────────────── */
 
-[data-theme="vayuzsocial-dark"]  { --_alias: dark; }
+[data-theme="rex-dark"]  { --_alias: dark; }
 [data-theme="vayuzsocial-light"] { --_alias: light; }
 
 
@@ -69,19 +69,21 @@ input[type="time"]::-webkit-clear-button {
 [data-theme="vayuzsocial-light"] {
   color-scheme: light;
 
-  /* ── Brand / Primary (orange — same in both themes) ── */
-  --white:              #ffffff;  
-  --brand:              #ff7a00;
-  --color-primary:              #ff7a00;
-  --color-primary-dark:         #e06b00;
-  --color-primary-hover:        #ff8c1f;
-  --color-primary-alt:          #f68b2d;   /* event-listing orange shade */
-  --color-primary-light:        #fff0e6;
-  --color-orange-50:            #fff8f2;
-  --color-orange-100:           #fff3e8;
-  --color-orange-200:           #fde8d0;
-  --color-orange-shadow:        rgba(255, 122, 0, 0.40);
-  --color-orange-shadow-lg:     rgba(255, 122, 0, 0.45);
+  /* ── Brand / Primary (magenta gradient — same in both themes) ── */
+  --white:              #ffffff;
+  --brand:              #F90C71;
+  --color-primary:              #F90C71;
+  --color-primary-dark:         #30001A;
+  --color-primary-hover:        #FF3D8C;
+  --color-primary-alt:          #FF4FA3;   /* lighter accent pink */
+  --color-primary-light:        #FFE3EF;
+  --color-orange-50:            #FFF5F9;
+  --color-orange-100:           #FFE3EF;
+  --color-orange-200:           #FFC2DC;
+  --color-orange-shadow:        rgba(249, 12, 113, 0.40);
+  --color-orange-shadow-lg:     rgba(249, 12, 113, 0.45);
+  --gradient-brand:             linear-gradient(135deg, #F90C71 0%, #30001A 100%);
+  --gradient-brand-vertical:    linear-gradient(180deg, #F90C71 0%, #30001A 100%);
 
   /* ── Backgrounds ── */
   --bg-page:                    #f4f6fa;   /* root page canvas */
@@ -123,7 +125,7 @@ input[type="time"]::-webkit-clear-button {
   --border-card:                #e8ecf2;
   --border-task:                #e8ecf2;
   --border-warm:                #ead8ca;
-  --border-warm-hover:          #ffb06b;
+  --border-warm-hover:          #FF6FA8;
   --listing-border:             #e2e8f0;
 
   /* ── Status: success ── */
@@ -178,7 +180,7 @@ input[type="time"]::-webkit-clear-button {
   --sprint-paused-text:         #b45309;
 
   /* ── Avatar rotation (6 vivid colors) ── */
-  --avatar-1:                   #ff7a00;
+  --avatar-1:                   #F90C71;
   --avatar-2:                   #6366f1;
   --avatar-3:                   #22c55e;
   --avatar-4:                   #ec4899;
@@ -219,7 +221,7 @@ input[type="time"]::-webkit-clear-button {
   --color-microsoft:            #0078D4;
 
   /* ── Project swatches (vivid — same both themes) ── */
-  --swatch-brand:               #ff7a00;
+  --swatch-brand:               #F90C71;
   --swatch-orange:              #f97316;
   --swatch-indigo:              #5b5fcf;
   --swatch-blue:                #3b82f6;
@@ -231,33 +233,33 @@ input[type="time"]::-webkit-clear-button {
   --swatch-violet:              #a855f7;
 
   /* ── Goal & KRA ── */
-  --goal-performance:           #ff7a00;
+  --goal-performance:           #F90C71;
   --goal-efficiency:            #6366f1;
   --goal-people:                #22c55e;
 
   /* ── Filter bar ── */
-  --filter-active-bg:           #fff8f2;
-  --filter-hover-bg:            #fff6ee;
-  --filter-active-text:         #c2410c;
+  --filter-active-bg:           #FFF5F9;
+  --filter-hover-bg:            #FFE9F2;
+  --filter-active-text:         #C2185B;
 
   /* ── Shadows ── */
-  --shadow-primary:             0 4px 16px rgba(255, 122, 0, 0.35);
-  --shadow-primary-hover:       0 8px 24px rgba(255, 122, 0, 0.42);
-  --shadow-primary-sm:          0 4px 14px rgba(255, 122, 0, 0.28);
+  --shadow-primary:             0 4px 16px rgba(249, 12, 113, 0.35);
+  --shadow-primary-hover:       0 8px 24px rgba(249, 12, 113, 0.42);
+  --shadow-primary-sm:          0 4px 14px rgba(249, 12, 113, 0.28);
   --shadow-card:                0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.05);
   --shadow-card-hover:          0 10px 28px rgba(0, 0, 0, 0.10), 0 4px 10px rgba(0, 0, 0, 0.06);
   --shadow-modal:               0 28px 90px rgba(15, 23, 42, 0.18);
   --shadow-dropdown:            0 20px 40px rgba(15, 23, 42, 0.10);
   --shadow-event-card:          0 18px 40px rgba(15, 23, 42, 0.14);
-  --shadow-event-card-hover:    0 24px 48px rgba(246, 139, 45, 0.18);
+  --shadow-event-card-hover:    0 24px 48px rgba(249, 12, 113, 0.18);
 
   /* ── Overlay scrim (modal / drawer backdrops) ── */
   --overlay-backdrop:           rgba(15, 23, 42, 0.45);
 
   /* ── Scrollbar ── */
-  --scrollbar-thumb:            #ff7a00;
+  --scrollbar-thumb:            #F90C71;
   --scrollbar-track:            #fff1e3;
-  --scrollbar-hover:            #ff8c1f;
+  --scrollbar-hover:            #FF3D8C;
 
   /* ── Page blob backgrounds (event listing light only) ── */
   --blob-indigo:                #A5B4FC;
@@ -271,22 +273,24 @@ input[type="time"]::-webkit-clear-button {
    ──────────────────────────────────────────────────────────────────────────── */
 
 [data-theme="dark"],
-[data-theme="vayuzsocial-dark"] {
+[data-theme="rex-dark"] {
   color-scheme: dark;
 
-  /* ── Brand (orange stays vivid on dark) ── */
-  --white:              #ffffff;  
-   --brand:              #ff7a00;
-  --color-primary:              #ff7a00;
-  --color-primary-dark:         #e06b00;
-  --color-primary-hover:        #ff8c1f;
-  --color-primary-alt:          #f68b2d;
-  --color-primary-light:        rgba(255, 122, 0, 0.15);
-  --color-orange-50:            rgba(255, 122, 0, 0.10);
-  --color-orange-100:           rgba(255, 122, 0, 0.15);
-  --color-orange-200:           rgba(255, 122, 0, 0.22);
-  --color-orange-shadow:        rgba(255, 122, 0, 0.50);
-  --color-orange-shadow-lg:     rgba(255, 122, 0, 0.60);
+  /* ── Brand (magenta stays vivid on dark) ── */
+  --white:              #ffffff;
+  --brand:              #F90C71;
+  --color-primary:              #F90C71;
+  --color-primary-dark:         #30001A;
+  --color-primary-hover:        #FF3D8C;
+  --color-primary-alt:          #FF4FA3;
+  --color-primary-light:        rgba(249, 12, 113, 0.15);
+  --color-orange-50:            rgba(249, 12, 113, 0.10);
+  --color-orange-100:           rgba(249, 12, 113, 0.15);
+  --color-orange-200:           rgba(249, 12, 113, 0.22);
+  --color-orange-shadow:        rgba(249, 12, 113, 0.50);
+  --color-orange-shadow-lg:     rgba(249, 12, 113, 0.60);
+  --gradient-brand:             linear-gradient(135deg, #F90C71 0%, #30001A 100%);
+  --gradient-brand-vertical:    linear-gradient(180deg, #F90C71 0%, #30001A 100%);
 
   /* ── Backgrounds ── */
   --bg-page:                    #07101E;
@@ -327,7 +331,7 @@ input[type="time"]::-webkit-clear-button {
   --border-card:                #30363d;
   --border-task:                #30363d;
   --border-warm:                #30363d;
-  --border-warm-hover:          #ff8c1f;
+  --border-warm-hover:          #FF3D8C;
   --listing-border:             #182C44;
 
   /* ── Status: success ── */
@@ -382,7 +386,7 @@ input[type="time"]::-webkit-clear-button {
   --sprint-paused-text:         #e3b341;
 
   /* ── Avatar (vivid stays vivid on dark) ── */
-  --avatar-1:                   #ff7a00;
+  --avatar-1:                   #F90C71;
   --avatar-2:                   #7c3aed;
   --avatar-3:                   #22c55e;
   --avatar-4:                   #ec4899;
@@ -416,33 +420,33 @@ input[type="time"]::-webkit-clear-button {
   --color-automation:           #79c0ff;
 
   /* ── Goal & KRA ── */
-  --goal-performance:           #ff7a00;
+  --goal-performance:           #F90C71;
   --goal-efficiency:            #79c0ff;
   --goal-people:                #3fb950;
 
   /* ── Filter bar ── */
-  --filter-active-bg:           rgba(255, 122, 0, 0.12);
-  --filter-hover-bg:            rgba(255, 122, 0, 0.08);
-  --filter-active-text:         #ff9b47;
+  --filter-active-bg:           rgba(249, 12, 113, 0.12);
+  --filter-hover-bg:            rgba(249, 12, 113, 0.08);
+  --filter-active-text:         #FF6FA8;
 
   /* ── Shadows ── */
-  --shadow-primary:             0 4px 16px rgba(255, 122, 0, 0.45);
-  --shadow-primary-hover:       0 8px 24px rgba(255, 122, 0, 0.55);
-  --shadow-primary-sm:          0 4px 14px rgba(255, 122, 0, 0.38);
+  --shadow-primary:             0 4px 16px rgba(249, 12, 113, 0.45);
+  --shadow-primary-hover:       0 8px 24px rgba(249, 12, 113, 0.55);
+  --shadow-primary-sm:          0 4px 14px rgba(249, 12, 113, 0.38);
   --shadow-card:                0 1px 3px rgba(0, 0, 0, 0.40);
   --shadow-card-hover:          0 10px 28px rgba(0, 0, 0, 0.55);
   --shadow-modal:               0 28px 90px rgba(0, 0, 0, 0.55);
   --shadow-dropdown:            0 20px 40px rgba(0, 0, 0, 0.40);
   --shadow-event-card:          0 2px 8px rgba(0, 0, 0, 0.40);
-  --shadow-event-card-hover:    0 24px 56px rgba(246, 139, 45, 0.24);
+  --shadow-event-card-hover:    0 24px 56px rgba(249, 12, 113, 0.24);
 
   /* ── Overlay scrim (modal / drawer backdrops) ── */
   --overlay-backdrop:           rgba(0, 0, 0, 0.65);
 
   /* ── Scrollbar ── */
-  --scrollbar-thumb:            #ff7a00;
+  --scrollbar-thumb:            #F90C71;
   --scrollbar-track:            #21262d;
-  --scrollbar-hover:            #ff8c1f;
+  --scrollbar-hover:            #FF3D8C;
 }
 
 
@@ -712,14 +716,14 @@ button { cursor: pointer; }
 .event-card-depth:hover {
   transform: translateY(-3px);
   box-shadow:
-    0 0 0 1.5px rgba(246, 139, 45, 0.72),
+    0 0 0 1.5px rgba(249, 12, 113, 0.72),
     0 0 0 3px rgba(168, 85, 247, 0.22),
     0 8px 20px rgba(0, 0, 0, 0.12),
     var(--shadow-event-card-hover);
 }
 [data-theme="dark"] .event-card-depth:hover {
   box-shadow:
-    0 0 0 1.5px rgba(246, 139, 45, 0.80),
+    0 0 0 1.5px rgba(249, 12, 113, 0.80),
     0 0 0 3px rgba(168, 85, 247, 0.28),
     0 8px 20px rgba(0, 0, 0, 0.45),
     var(--shadow-event-card-hover);
@@ -984,7 +988,7 @@ button { cursor: pointer; }
 .filter-chip {
   transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.16s ease, box-shadow 0.16s ease;
 }
-.filter-chip:hover { transform: scale(1.05) translateY(-1px); background: var(--color-orange-200); box-shadow: 0 4px 12px rgba(246, 139, 45, 0.25); }
+.filter-chip:hover { transform: scale(1.05) translateY(-1px); background: var(--color-orange-200); box-shadow: 0 4px 12px rgba(249, 12, 113, 0.25); }
 .filter-chip:hover i { transform: rotate(90deg); transition: transform 0.2s ease; }
 .filter-chip i { transition: transform 0.2s ease; }
 .filter-chip:active { transform: scale(0.96); }
@@ -1040,7 +1044,7 @@ button { cursor: pointer; }
   border-color: var(--color-primary) !important;
   color: var(--color-primary) !important;
   background: var(--color-orange-50) !important;
-  box-shadow: 0 4px 12px rgba(246, 139, 45, 0.18);
+  box-shadow: 0 4px 12px rgba(249, 12, 113, 0.18);
 }
 .ce-pill--active:hover { transform: translateY(-1px) scale(1.04); box-shadow: var(--shadow-primary); filter: brightness(1.08); }
 .ce-pill:not(.ce-pill--active):active { transform: scale(0.95); }
@@ -1073,12 +1077,12 @@ button { cursor: pointer; }
   border-color: var(--color-primary) !important;
   background: var(--color-orange-50) !important;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(246, 139, 45, 0.16);
+  box-shadow: 0 6px 18px rgba(249, 12, 113, 0.16);
 }
 
 /* ── Input hover glow ── */
 .input-hover { transition: border-color 0.18s ease, box-shadow 0.18s ease; }
-.input-hover:hover { border-color: var(--color-primary) !important; box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.08); }
+.input-hover:hover { border-color: var(--color-primary) !important; box-shadow: 0 0 0 3px rgba(249, 12, 113, 0.08); }
 
 /* ── AI generate button ── */
 .btn-ai-gen {
@@ -1089,7 +1093,7 @@ button { cursor: pointer; }
   background: var(--color-orange-100) !important;
   border-color: var(--color-primary) !important;
   color: var(--color-primary) !important;
-  box-shadow: 0 6px 18px rgba(246, 139, 45, 0.28);
+  box-shadow: 0 6px 18px rgba(249, 12, 113, 0.28);
 }
 .btn-ai-gen:hover i { animation: vz-ai-sparkle 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
@@ -1257,6 +1261,11 @@ button { cursor: pointer; }
 .surface    { background-color: var(--bg-surface); }
 .surface-2  { background-color: var(--bg-surface-2); }
 
+/* Brand gradient chrome — header / sidebar. Same in both themes: the brand
+   gradient is chrome, not content, so it does not invert with light/dark. */
+.bg-gradient-brand          { background: var(--gradient-brand); }
+.bg-gradient-brand-vertical { background: var(--gradient-brand-vertical); }
+
 /* Gradient bg for light event listing page */
 [data-theme="light"] .page-bg,
 [data-theme="vayuzsocial-light"] .page-bg {
@@ -1266,7 +1275,7 @@ button { cursor: pointer; }
 /* Page blob system (event listing — light only) */
 .page-blobs { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
 [data-theme="dark"] .page-blobs,
-[data-theme="vayuzsocial-dark"] .page-blobs { display: none; }
+[data-theme="rex-dark"] .page-blobs { display: none; }
 .page-blobs + * { position: relative; z-index: 1; }
 .page-blob { position: absolute; filter: blur(52px); }
 .blob-indigo { width: 324px; height: 324px; left: -40px;  top: -60px;    border-radius: 140px; background: #A5B4FC; opacity: 0.38; }

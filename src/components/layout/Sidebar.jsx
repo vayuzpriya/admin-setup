@@ -14,7 +14,8 @@ import {
   Sun,
   Moon,
   Settings,
-  HelpCircle
+  HelpCircle,
+  Sparkles,
 } from 'lucide-react';
 
 export default function Sidebar({
@@ -27,7 +28,7 @@ export default function Sidebar({
 }) {
   const menuItems = [
     { id: 'dashboard', name: 'Overview', icon: LayoutDashboard },
-    { id: 'users', name: 'User Management', icon: Users },
+    { id: 'users', name: 'Staff Management', icon: Users },
     { id: 'roles', name: 'Role Management', icon: Shield },
     { id: 'forms', name: 'Form Elements', icon: Clipboard },
     { id: 'overlays', name: 'Drawer & Modals', icon: Layers },
@@ -44,26 +45,24 @@ export default function Sidebar({
 
   return (
     <aside
-      className={`fixed top-0 left-0 z-40 h-screen border-r border-[var(--border-color)] bg-[var(--bg-surface)] backdrop-blur-lg flex flex-col justify-between transition-all duration-300 ${
+      className={`bg-gradient-brand-vertical fixed top-0 left-0 z-40 h-screen flex flex-col justify-between transition-all duration-300 ${
         isCollapsed ? 'w-20' : 'w-64'
       }`}
     >
       {/* Header */}
-      <div className="p-5 flex items-center justify-between border-b border-[var(--border-color)] flex-shrink-0">
-        <div className="flex items-center gap-3 overflow-hidden">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-[var(--color-primary)] to-[var(--color-purple)] text-white shadow-md shadow-[var(--color-orange-shadow)] flex-shrink-0">
-            <Layers className="w-5 h-5 animate-pulse" />
-          </div>
+      <div className="p-5 flex items-center justify-between border-b border-white/10 flex-shrink-0">
+        <div className="flex items-center gap-2.5 overflow-hidden">
+          <Sparkles className="w-5 h-5 text-white flex-shrink-0" />
           {!isCollapsed && (
-            <span className="font-bold text-lg text-[var(--text-primary)] tracking-tight whitespace-nowrap animate-fade-in">
-              Rex<span className="text-[var(--color-primary)]">Admin</span>
+            <span className="font-bold text-lg text-white tracking-tight whitespace-nowrap animate-fade-in">
+              Rex<span className="text-white/70">Admin</span>
             </span>
           )}
         </div>
         {!isCollapsed && (
           <button
             onClick={() => setIsCollapsed(true)}
-            className="hidden md:flex p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors"
+            className="hidden md:flex p-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/10 transition-colors"
             title="Collapse Sidebar"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -84,19 +83,13 @@ export default function Sidebar({
                     onClick={() => setActiveTab(item.id)}
                     className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 group relative ${
                       isActive
-                        ? 'bg-[var(--color-primary-light)] text-[var(--color-primary)]'
-                        : 'text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]'
+                        ? 'bg-white/15 text-white'
+                        : 'text-white/65 hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <Icon className={`w-5 h-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-105 ${
-                      isActive ? 'text-[var(--color-primary)]' : 'text-[var(--text-muted)]'
-                    }`} />
+                    <Icon className="w-5 h-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-105" />
                     {!isCollapsed && (
                       <span className="whitespace-nowrap truncate">{item.name}</span>
-                    )}
-                    {/* Active highlight pill */}
-                    {isActive && (
-                      <span className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-[var(--color-primary)] rounded-r-md" />
                     )}
                     {/* Tooltip on collapse */}
                     {isCollapsed && (
@@ -112,9 +105,9 @@ export default function Sidebar({
         </div>
 
         {/* Separator / Sub list */}
-        <div className="pt-4 border-t border-[var(--border-color)]">
+        <div className="pt-4 border-t border-white/10">
           {!isCollapsed && (
-            <span className="px-3.5 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider block mb-2.5">
+            <span className="px-3.5 text-xs font-semibold text-white/50 uppercase tracking-wider block mb-2.5">
               Support & settings
             </span>
           )}
@@ -128,13 +121,11 @@ export default function Sidebar({
                     onClick={() => setActiveTab(item.id)}
                     className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 group relative ${
                       isActive
-                        ? 'bg-[var(--color-primary-light)] text-[var(--color-primary)]'
-                        : 'text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]'
+                        ? 'bg-white/15 text-white'
+                        : 'text-white/65 hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    <Icon className={`w-5 h-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-105 ${
-                      isActive ? 'text-[var(--color-primary)]' : 'text-[var(--text-muted)]'
-                    }`} />
+                    <Icon className="w-5 h-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-105" />
                     {!isCollapsed && (
                       <span className="whitespace-nowrap truncate">{item.name}</span>
                     )}
@@ -152,19 +143,19 @@ export default function Sidebar({
       </div>
 
       {/* Footer / Toggle Theme */}
-      <div className="p-4 border-t border-[var(--border-color)] space-y-3.5 flex-shrink-0">
+      <div className="p-4 border-t border-white/10 space-y-3.5 flex-shrink-0">
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
-          className="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] font-medium text-sm transition-colors group relative"
+          className="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-white/65 hover:bg-white/10 hover:text-white font-medium text-sm transition-colors group relative"
         >
           {isDarkMode ? (
             <>
-              <Sun className="w-5 h-5 text-[var(--color-warning)] animate-spin-slow flex-shrink-0" />
+              <Sun className="w-5 h-5 flex-shrink-0" />
               {!isCollapsed && <span>Light Mode</span>}
             </>
           ) : (
             <>
-              <Moon className="w-5 h-5 text-[var(--text-muted)] flex-shrink-0" />
+              <Moon className="w-5 h-5 flex-shrink-0" />
               {!isCollapsed && <span>Dark Mode</span>}
             </>
           )}
@@ -178,7 +169,7 @@ export default function Sidebar({
         {isCollapsed && (
           <button
             onClick={() => setIsCollapsed(false)}
-            className="flex md:hidden mx-auto p-2 rounded-xl text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors"
+            className="flex md:hidden mx-auto p-2 rounded-xl text-white/60 hover:text-white hover:bg-white/10 transition-colors"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
