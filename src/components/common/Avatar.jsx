@@ -18,9 +18,9 @@ export default function Avatar({
   };
 
   const statusColors = {
-    online: 'bg-emerald-500 ring-white dark:ring-slate-900',
-    offline: 'bg-slate-400 ring-white dark:ring-slate-900',
-    away: 'bg-amber-500 ring-white dark:ring-slate-900',
+    online: 'bg-[var(--color-success)] ring-[var(--bg-surface)]',
+    offline: 'bg-[var(--text-muted)] ring-[var(--bg-surface)]',
+    away: 'bg-[var(--color-warning)] ring-[var(--bg-surface)]',
   };
 
   const getInitials = (userName) => {
@@ -37,13 +37,13 @@ export default function Avatar({
     <div className={`relative inline-block flex-shrink-0 ${className}`} {...props}>
       {src ? (
         <img
-          className={`${sizes[size]} rounded-full object-cover border border-slate-200 dark:border-slate-800`}
+          className={`${sizes[size]} rounded-full object-cover border border-[var(--border-color)]`}
           src={src}
           alt={alt}
         />
       ) : (
         <div
-          className={`${sizes[size]} rounded-full flex items-center justify-center font-semibold bg-brand-100 text-brand-700 dark:bg-brand-900/30 dark:text-brand-400 border border-brand-200/50 dark:border-brand-800/50`}
+          className={`${sizes[size]} rounded-full flex items-center justify-center font-semibold bg-[var(--color-primary-light)] text-[var(--color-primary)] border border-[var(--color-orange-100)]`}
         >
           {getInitials(name) || '?'}
         </div>

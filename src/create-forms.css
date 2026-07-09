@@ -1,0 +1,492 @@
+/* ════════════════════════════════════════════════════════════
+   CREATE FORMS UNIFIED STYLING (Sprint, Project, Task)
+   Synchronized with event-creation styling patterns
+   ════════════════════════════════════════════════════════════ */
+
+/* ── THEME TOKENS (Mirrored from event.css) ── */
+
+[data-theme="dark"],
+[data-theme="vayuzsocial-dark"] {
+  --color-primary: #f97316;
+  --color-primary-dark: #ea6c0a;
+  --color-primary-hover: #f68b2d;
+  --color-primary-alt: #ef8430;
+  --color-primary-light: rgba(249, 115, 22, 0.08);
+  --color-orange-50: rgba(249, 115, 22, 0.08);
+  --color-orange-100: rgba(249, 115, 22, 0.12);
+  --bg-page: #07101E;
+  --bg-surface: #0E1A2D;
+  --bg-surface-2: #132036;
+  --bg-input: #132036;
+  --bg-hover: #132036;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-color: #182C44;
+  --color-success: #4ade80;
+  --color-warning: #f5b301;
+  --color-danger: #ef4444;
+}
+
+[data-theme="light"],
+[data-theme="vayuzsocial-light"] {
+  --color-primary: #f97316;
+  --color-primary-dark: #ea6c0a;
+  --color-primary-hover: #f68b2d;
+  --color-primary-alt: #ef8430;
+  --color-primary-light: #fff0e6;
+  --color-orange-50: #fff5ef;
+  --color-orange-100: #FEF3E8;
+  --bg-page: #f4f6fa;
+  --bg-surface: #ffffff;
+  --bg-surface-2: #f8faff;
+  --bg-input: #f8f9fc;
+  --bg-hover: #f4f5fb;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --border-color: #e2e8f0;
+  --color-success: #16a34a;
+  --color-warning: #f5b301;
+  --color-danger: #ef4444;
+}
+
+/* ════════════════════════════════════════════════════════════
+   INPUT & FORM FIELD STYLING
+   ════════════════════════════════════════════════════════════ */
+
+/* Base input styles */
+input,
+textarea,
+select {
+  background-color: var(--bg-surface-2);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+  font-family: inherit;
+  font-size: inherit;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: var(--text-muted) !important;
+}
+
+/* Hover state — orange (primary) border on ALL inputs in every form */
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):hover,
+textarea:hover,
+select:hover {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+}
+
+/* Focus state */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+}
+
+/* Hover state for inputs */
+.input-hover {
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
+}
+
+.input-hover:hover {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+  background-color: var(--bg-surface-2);
+}
+
+.input-hover:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+}
+
+/* Input with icon wrapper */
+.input-wrap {
+  position: relative;
+}
+
+.input-wrap .input-icon {
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.18s ease;
+  pointer-events: none;
+  color: var(--text-muted);
+
+}
+
+.input-wrap:hover .input-icon {
+  transform: scale(1.28);
+  color: var(--color-primary);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+}
+
+.input-wrap:hover input,
+.input-wrap:hover select,
+.input-wrap:hover textarea {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+}
+
+.input-wrap:focus-within .input-icon {
+  transform: scale(1.28);
+  color: var(--color-primary);
+}
+
+/* ════════════════════════════════════════════════════════════
+   CREATE-FORM INPUT PADDING — uniform p-2 (0.5rem) on every field,
+   with extra right padding wherever an icon sits on the right side.
+   Scoped to .create-form-scope so it only affects the create pages.
+   Borderless inline search inputs (.bg-transparent) are excluded.
+   ════════════════════════════════════════════════════════════ */
+.create-form-scope input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):not([type="color"]):not(.bg-transparent),
+.create-form-scope textarea:not(.bg-transparent) {
+  padding: 0.5rem !important;
+}
+
+/* Selects carry a built-in right-side arrow — keep room for it */
+.create-form-scope select:not(.bg-transparent) {
+  padding: 0.5rem !important;
+  padding-right: 1.75rem !important;
+}
+
+/* Any field wrapped with a right-side icon (calendar, etc.) clears the icon */
+.create-form-scope .input-wrap input,
+.create-form-scope .input-wrap select,
+.create-form-scope .input-wrap textarea {
+  padding-right: 2.25rem !important;
+}
+
+/* Native date inputs — show the mm/dd/yyyy placeholder in muted color,
+   then switch to the normal text color once a date is chosen (.date-filled). */
+.create-form-scope input[type="date"]::-webkit-datetime-edit {
+  color: var(--text-muted);
+}
+.create-form-scope input[type="date"].date-filled::-webkit-datetime-edit {
+  color: var(--text-primary);
+}
+/* Firefox fallback (no datetime-edit pseudo-element) */
+.create-form-scope input[type="date"]:not(.date-filled) {
+  color: var(--text-muted);
+}
+.create-form-scope input[type="date"].date-filled {
+  color: var(--text-primary);
+}
+
+/* ════════════════════════════════════════════════════════════
+   BUTTON STYLING
+   ════════════════════════════════════════════════════════════ */
+
+/* Primary button - Lift effect */
+.btn-primary,
+.btn-lift {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 26px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background-size: 200%;
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.38);
+  transition: box-shadow 0.2s, transform 0.15s, background-position 0.3s;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.btn-primary:hover,
+.btn-lift:hover {
+  background-position: right center;
+  box-shadow: 0 10px 28px rgba(249, 115, 22, 0.52);
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.btn-primary:active,
+.btn-lift:active {
+  transform: translateY(0) scale(0.96);
+  filter: brightness(0.96);
+}
+
+/* Secondary button - Ghost style */
+.btn-secondary,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 11px 16px;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-radius: 8px;
+  transition: color 0.15s, background 0.15s, border-color 0.15s, transform 0.15s;
+  font-family: inherit;
+}
+
+.btn-secondary:hover,
+.btn-ghost:hover {
+  color: var(--color-primary);
+  background: rgba(249, 115, 22, 0.06);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.btn-secondary:active,
+.btn-ghost:active {
+  transform: scale(0.97);
+  background: rgba(249, 115, 22, 0.10);
+}
+
+/* Danger button */
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #c0392b 100%);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.38);
+}
+
+.btn-danger:hover {
+  box-shadow: 0 10px 28px rgba(239, 68, 68, 0.45);
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.btn-danger:active {
+  transform: scale(0.96);
+}
+
+/* ════════════════════════════════════════════════════════════
+   SELECT / DROPDOWN STYLING
+   ════════════════════════════════════════════════════════════ */
+
+select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  padding-right: 28px;
+  cursor: pointer;
+  appearance: none;
+}
+
+select:hover {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.08);
+}
+
+select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.12);
+}
+
+/* ════════════════════════════════════════════════════════════
+   LABEL & FORM TEXT STYLING
+   ════════════════════════════════════════════════════════════ */
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 6px;
+  transition: color 0.15s ease;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.form-field label {
+  margin-bottom: 8px;
+}
+
+.form-help-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.form-error {
+  font-size: 12px;
+  color: var(--color-danger);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  animation: mi-shake 0.45s ease-in-out;
+}
+
+/* ════════════════════════════════════════════════════════════
+   PILL BUTTONS (Date quick-select, tags)
+   ════════════════════════════════════════════════════════════ */
+
+.pill,
+.ce-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background-color: var(--bg-surface-2);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.16s ease,
+    border-color 0.16s ease, color 0.16s ease, box-shadow 0.18s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pill:hover,
+.ce-pill:not(.ce-pill--active):hover {
+  transform: translateY(-2px) scale(1.05);
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary) !important;
+  background: rgba(249, 115, 22, 0.07) !important;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.18);
+}
+
+.pill:active,
+.ce-pill:active {
+  transform: scale(0.95);
+}
+
+.pill--active,
+.ce-pill--active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+}
+
+.pill--active:hover,
+.ce-pill--active:hover {
+  transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 6px 18px rgba(249, 115, 22, 0.35);
+  filter: brightness(1.08);
+}
+
+/* ════════════════════════════════════════════════════════════
+   MICROINTERACTION KEYFRAMES
+   ════════════════════════════════════════════════════════════ */
+
+@keyframes mi-shake {
+  0%, 100% { transform: translateX(0); }
+  15%, 45%, 75% { transform: translateX(-5px); }
+  30%, 60%, 90% { transform: translateX(5px); }
+}
+
+@keyframes mi-pop-in {
+  0%   { transform: scale(0.72); opacity: 0; }
+  60%  { transform: scale(1.14); }
+  100% { transform: scale(1);    opacity: 1; }
+}
+
+@keyframes pill-icon-pop {
+  0%   { transform: scale(1) rotate(0deg);   }
+  40%  { transform: scale(1.3) rotate(-12deg); }
+  70%  { transform: scale(0.9) rotate(6deg);  }
+  100% { transform: scale(1) rotate(0deg);   }
+}
+
+/* Utility classes for animations */
+.mi-shake         { animation: mi-shake 0.45s ease-in-out; }
+.mi-pop-in        { animation: mi-pop-in 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+
+/* ════════════════════════════════════════════════════════════
+   FORM LAYOUT UTILITIES
+   ════════════════════════════════════════════════════════════ */
+
+.form-grid {
+  display: grid;
+  gap: 20px;
+}
+
+.form-grid--2col {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-section {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 20px;
+  background: var(--bg-surface);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.form-section:hover {
+  border-color: rgba(249, 115, 22, 0.3);
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.08);
+}
+
+/* ════════════════════════════════════════════════════════════
+   SCROLLBAR STYLING
+   ════════════════════════════════════════════════════════════ */
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom scrollbar for other elements */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+  transition: background 0.18s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE UTILITIES
+   ════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .form-grid--2col {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+}

@@ -44,26 +44,26 @@ export default function Sidebar({
 
   return (
     <aside
-      className={`fixed top-0 left-0 z-40 h-screen border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 backdrop-blur-lg flex flex-col justify-between transition-all duration-300 ${
+      className={`fixed top-0 left-0 z-40 h-screen border-r border-[var(--border-color)] bg-[var(--bg-surface)] backdrop-blur-lg flex flex-col justify-between transition-all duration-300 ${
         isCollapsed ? 'w-20' : 'w-64'
       }`}
     >
       {/* Header */}
-      <div className="p-5 flex items-center justify-between border-b border-slate-100 dark:border-slate-800/80 flex-shrink-0">
+      <div className="p-5 flex items-center justify-between border-b border-[var(--border-color)] flex-shrink-0">
         <div className="flex items-center gap-3 overflow-hidden">
-          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-purple-600 text-white shadow-md shadow-brand-500/20 flex-shrink-0">
+          <div className="flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-tr from-[var(--color-primary)] to-[var(--color-purple)] text-white shadow-md shadow-[var(--color-orange-shadow)] flex-shrink-0">
             <Layers className="w-5 h-5 animate-pulse" />
           </div>
           {!isCollapsed && (
-            <span className="font-bold text-lg text-slate-900 dark:text-slate-55 tracking-tight whitespace-nowrap animate-fade-in">
-              Rex<span className="text-brand-500">Admin</span>
+            <span className="font-bold text-lg text-[var(--text-primary)] tracking-tight whitespace-nowrap animate-fade-in">
+              Rex<span className="text-[var(--color-primary)]">Admin</span>
             </span>
           )}
         </div>
         {!isCollapsed && (
           <button
             onClick={() => setIsCollapsed(true)}
-            className="hidden md:flex p-1.5 rounded-lg text-slate-400 hover:text-slate-655 hover:bg-slate-100 dark:hover:bg-slate-850 dark:hover:text-slate-250 transition-colors"
+            className="hidden md:flex p-1.5 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors"
             title="Collapse Sidebar"
           >
             <ChevronLeft className="w-4 h-4" />
@@ -84,23 +84,23 @@ export default function Sidebar({
                     onClick={() => setActiveTab(item.id)}
                     className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 group relative ${
                       isActive
-                        ? 'bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400'
-                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200'
+                        ? 'bg-[var(--color-primary-light)] text-[var(--color-primary)]'
+                        : 'text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]'
                     }`}
                   >
                     <Icon className={`w-5 h-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-105 ${
-                      isActive ? 'text-brand-600 dark:text-brand-400' : 'text-slate-400 dark:text-slate-500'
+                      isActive ? 'text-[var(--color-primary)]' : 'text-[var(--text-muted)]'
                     }`} />
                     {!isCollapsed && (
                       <span className="whitespace-nowrap truncate">{item.name}</span>
                     )}
                     {/* Active highlight pill */}
                     {isActive && (
-                      <span className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-500 rounded-r-md" />
+                      <span className="absolute left-0 top-1/4 bottom-1/4 w-1 bg-[var(--color-primary)] rounded-r-md" />
                     )}
                     {/* Tooltip on collapse */}
                     {isCollapsed && (
-                      <span className="absolute left-16 scale-0 rounded bg-slate-900 px-2 py-1 text-xs text-white group-hover:scale-100 transition-all z-50 whitespace-nowrap shadow-md pointer-events-none">
+                      <span className="absolute left-16 scale-0 rounded bg-[var(--bg-inverse)] px-2 py-1 text-xs text-white group-hover:scale-100 transition-all z-50 whitespace-nowrap shadow-md pointer-events-none">
                         {item.name}
                       </span>
                     )}
@@ -112,9 +112,9 @@ export default function Sidebar({
         </div>
 
         {/* Separator / Sub list */}
-        <div className="pt-4 border-t border-slate-100 dark:border-slate-800/80">
+        <div className="pt-4 border-t border-[var(--border-color)]">
           {!isCollapsed && (
-            <span className="px-3.5 text-xs font-semibold text-slate-455 dark:text-slate-500 uppercase tracking-wider block mb-2.5">
+            <span className="px-3.5 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider block mb-2.5">
               Support & settings
             </span>
           )}
@@ -128,18 +128,18 @@ export default function Sidebar({
                     onClick={() => setActiveTab(item.id)}
                     className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 group relative ${
                       isActive
-                        ? 'bg-brand-50 text-brand-600 dark:bg-brand-500/10 dark:text-brand-400'
-                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:text-slate-900 dark:hover:text-slate-200'
+                        ? 'bg-[var(--color-primary-light)] text-[var(--color-primary)]'
+                        : 'text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)]'
                     }`}
                   >
                     <Icon className={`w-5 h-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-105 ${
-                      isActive ? 'text-brand-600 dark:text-brand-400' : 'text-slate-400 dark:text-slate-505'
+                      isActive ? 'text-[var(--color-primary)]' : 'text-[var(--text-muted)]'
                     }`} />
                     {!isCollapsed && (
                       <span className="whitespace-nowrap truncate">{item.name}</span>
                     )}
                     {isCollapsed && (
-                      <span className="absolute left-16 scale-0 rounded bg-slate-900 px-2 py-1 text-xs text-white group-hover:scale-100 transition-all z-50 whitespace-nowrap shadow-md pointer-events-none">
+                      <span className="absolute left-16 scale-0 rounded bg-[var(--bg-inverse)] px-2 py-1 text-xs text-white group-hover:scale-100 transition-all z-50 whitespace-nowrap shadow-md pointer-events-none">
                         {item.name}
                       </span>
                     )}
@@ -152,24 +152,24 @@ export default function Sidebar({
       </div>
 
       {/* Footer / Toggle Theme */}
-      <div className="p-4 border-t border-slate-100 dark:border-slate-800/80 space-y-3.5 flex-shrink-0">
+      <div className="p-4 border-t border-[var(--border-color)] space-y-3.5 flex-shrink-0">
         <button
           onClick={() => setIsDarkMode(!isDarkMode)}
-          className="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/55 hover:text-slate-900 dark:hover:text-slate-200 font-medium text-sm transition-colors group relative"
+          className="w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] font-medium text-sm transition-colors group relative"
         >
           {isDarkMode ? (
             <>
-              <Sun className="w-5 h-5 text-amber-500 animate-spin-slow flex-shrink-0" />
+              <Sun className="w-5 h-5 text-[var(--color-warning)] animate-spin-slow flex-shrink-0" />
               {!isCollapsed && <span>Light Mode</span>}
             </>
           ) : (
             <>
-              <Moon className="w-5 h-5 text-slate-450 flex-shrink-0" />
+              <Moon className="w-5 h-5 text-[var(--text-muted)] flex-shrink-0" />
               {!isCollapsed && <span>Dark Mode</span>}
             </>
           )}
           {isCollapsed && (
-            <span className="absolute left-16 scale-0 rounded bg-slate-900 px-2 py-1 text-xs text-white group-hover:scale-100 transition-all z-50 whitespace-nowrap shadow-md pointer-events-none">
+            <span className="absolute left-16 scale-0 rounded bg-[var(--bg-inverse)] px-2 py-1 text-xs text-white group-hover:scale-100 transition-all z-50 whitespace-nowrap shadow-md pointer-events-none">
               Toggle Theme
             </span>
           )}
@@ -178,7 +178,7 @@ export default function Sidebar({
         {isCollapsed && (
           <button
             onClick={() => setIsCollapsed(false)}
-            className="flex md:hidden mx-auto p-2 rounded-xl text-slate-400 hover:text-slate-655 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="flex md:hidden mx-auto p-2 rounded-xl text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

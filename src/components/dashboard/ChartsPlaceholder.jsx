@@ -57,20 +57,20 @@ export default function ChartsPlaceholder() {
       <Card className="lg:col-span-2">
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
-            <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+            <h3 className="text-base font-semibold text-[var(--text-primary)]">
               Revenue Growth Over Time
             </h3>
-            <p className="text-xs text-slate-450 dark:text-slate-500">
+            <p className="text-xs text-[var(--text-muted)]">
               Interactive review of monthly platform gross volumes
             </p>
           </div>
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400 font-medium">
-              <span className="w-2.5 h-2.5 rounded-full bg-brand-500 inline-block" />
+            <span className="flex items-center gap-1.5 text-xs text-[var(--text-secondary)] font-medium">
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--color-primary)] inline-block" />
               SaaS Sales
             </span>
-            <span className="flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-400 font-medium">
-              <span className="w-2.5 h-2.5 rounded-full bg-slate-350 dark:bg-slate-700 inline-block" />
+            <span className="flex items-center gap-1.5 text-xs text-[var(--text-secondary)] font-medium">
+              <span className="w-2.5 h-2.5 rounded-full bg-[var(--border-medium)] inline-block" />
               Direct Sales
             </span>
             <Badge variant="brand" dot>Live</Badge>
@@ -95,7 +95,7 @@ export default function ChartsPlaceholder() {
                     x2={svgWidth - padding}
                     y2={y}
                     stroke="currentColor"
-                    className="text-slate-100 dark:text-slate-800/60"
+                    className="text-[var(--border-color)]"
                     strokeWidth="1.2"
                     strokeDasharray="4 4"
                   />
@@ -113,7 +113,7 @@ export default function ChartsPlaceholder() {
               <path
                 d={linePath}
                 fill="none"
-                stroke="#8b5cf6"
+                stroke="var(--color-primary)"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -124,7 +124,7 @@ export default function ChartsPlaceholder() {
                 d={secondaryLinePath}
                 fill="none"
                 stroke="currentColor"
-                className="text-slate-300 dark:text-slate-700"
+                className="text-[var(--border-medium)]"
                 strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -138,15 +138,15 @@ export default function ChartsPlaceholder() {
                     cx={p.x}
                     cy={p.y}
                     r={hoveredPoint === i ? "8" : "0"}
-                    fill="#c084fc"
+                    fill="var(--color-primary-alt)"
                     className="opacity-20 transition-all duration-200"
                   />
                   <circle
                     cx={p.x}
                     cy={p.y}
                     r="4"
-                    fill="#8b5cf6"
-                    stroke="#ffffff"
+                    fill="var(--color-primary)"
+                    stroke="var(--white)"
                     strokeWidth="1.5"
                     className="cursor-pointer"
                     onMouseEnter={() => setHoveredPoint(i)}
@@ -158,8 +158,8 @@ export default function ChartsPlaceholder() {
               {/* Gradients */}
               <defs>
                 <linearGradient id="area-gradient" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#8b5cf6" />
-                  <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0" />
+                  <stop offset="0%" stopColor="var(--color-primary)" />
+                  <stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0" />
                 </linearGradient>
               </defs>
             </svg>
@@ -167,7 +167,7 @@ export default function ChartsPlaceholder() {
             {/* Hover Tooltip box */}
             {hoveredPoint !== null && (
               <div
-                className="absolute z-10 px-3 py-1.5 bg-slate-900 text-white dark:bg-white dark:text-slate-900 rounded-lg text-xs font-semibold shadow-md pointer-events-none transition-all duration-150 animate-fade-in"
+                className="absolute z-10 px-3 py-1.5 bg-[var(--bg-inverse)] text-white rounded-lg text-xs font-semibold shadow-md pointer-events-none transition-all duration-150 animate-fade-in"
                 style={{
                   left: `${(hoveredPoint / (lineChartData.length - 1)) * 82 + 8}%`,
                   top: `${(points[hoveredPoint].y / svgHeight) * 70}%`,
@@ -181,7 +181,7 @@ export default function ChartsPlaceholder() {
           </div>
 
           {/* X Axis Labels */}
-          <div className="flex justify-between items-center px-4 mt-2 text-[10px] font-semibold text-slate-450 dark:text-slate-500 uppercase tracking-wider">
+          <div className="flex justify-between items-center px-4 mt-2 text-[10px] font-semibold text-[var(--text-label)] uppercase tracking-wider">
             {lineChartData.map((d, index) => (
               <span key={index}>{d.label}</span>
             ))}
@@ -192,10 +192,10 @@ export default function ChartsPlaceholder() {
       {/* Bar Chart - Takes 1 col */}
       <Card>
         <CardHeader>
-          <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+          <h3 className="text-base font-semibold text-[var(--text-primary)]">
             Weekly Activity
           </h3>
-          <p className="text-xs text-slate-450 dark:text-slate-500">
+          <p className="text-xs text-[var(--text-label)]">
             Aggregated operations per day
           </p>
         </CardHeader>
@@ -217,13 +217,13 @@ export default function ChartsPlaceholder() {
                     <div
                       className={`w-full rounded-t-lg transition-all duration-300 ${
                         isHovered
-                          ? 'bg-gradient-to-t from-brand-600 to-purple-500 shadow-md shadow-brand-500/20'
-                          : 'bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700'
+                          ? 'bg-gradient-to-t from-[var(--color-primary)] to-[var(--color-purple)] shadow-md shadow-[var(--color-orange-shadow)]'
+                          : 'bg-[var(--border-medium)] hover:bg-[var(--text-muted)]'
                       }`}
                       style={{ height: barHeight }}
                     />
                   </div>
-                  <span className="text-[10px] font-medium text-slate-450 dark:text-slate-500 mt-2">
+                  <span className="text-[10px] font-medium text-[var(--text-label)] mt-2">
                     {d.label}
                   </span>
                 </div>
@@ -233,7 +233,7 @@ export default function ChartsPlaceholder() {
             {/* Hover Tooltip Box */}
             {hoveredBar !== null && (
               <div
-                className="absolute z-10 px-2.5 py-1 bg-slate-900 text-white dark:bg-white dark:text-slate-900 rounded-lg text-[11px] font-semibold shadow-md pointer-events-none transition-all duration-150 animate-fade-in-up"
+                className="absolute z-10 px-2.5 py-1 bg-[var(--bg-inverse)] text-white rounded-lg text-[11px] font-semibold shadow-md pointer-events-none transition-all duration-150 animate-fade-in-up"
                 style={{
                   left: `${(hoveredBar / (barChartData.length - 1)) * 75 + 12.5}%`,
                   bottom: '105%',

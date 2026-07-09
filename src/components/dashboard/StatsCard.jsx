@@ -39,21 +39,21 @@ export default function StatsCard({
       <CardBody className="p-6">
         <div className="flex justify-between items-start">
           <div className="space-y-2">
-            <span className="text-xs font-semibold text-slate-450 dark:text-slate-500 uppercase tracking-wider">
+            <span className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider">
               {title}
             </span>
             <div className="flex items-baseline gap-2.5">
-              <span className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
+              <span className="text-3xl font-bold tracking-tight text-[var(--text-primary)]">
                 {value}
               </span>
               {change && (
                 <span
                   className={`inline-flex items-center gap-0.5 text-xs font-semibold px-2 py-0.5 rounded-full ${
                     isPositive
-                      ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-400'
+                      ? 'bg-[var(--color-success-bg)] text-[var(--color-success-dark)]'
                       : isNegative
-                      ? 'bg-red-50 text-red-700 dark:bg-red-500/10 dark:text-red-400'
-                      : 'bg-slate-50 text-slate-700 dark:bg-slate-800 dark:text-slate-400'
+                      ? 'bg-[var(--color-danger-bg)] text-[var(--color-danger)]'
+                      : 'bg-[var(--bg-surface-2)] text-[var(--text-secondary)]'
                   }`}
                 >
                   {isPositive && <ArrowUpRight className="w-3.5 h-3.5" />}
@@ -62,7 +62,7 @@ export default function StatsCard({
                 </span>
               )}
             </div>
-            <span className="text-xs text-slate-400 dark:text-slate-500 block">
+            <span className="text-xs text-[var(--text-muted)] block">
               {label}
             </span>
           </div>
@@ -70,7 +70,7 @@ export default function StatsCard({
           {/* Right Section: Icon or Sparkline */}
           <div className="flex flex-col items-end justify-between h-full space-y-4">
             {Icon && (
-              <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 border border-slate-200/50 dark:border-slate-700/50">
+              <div className="p-2.5 rounded-xl bg-[var(--bg-surface-2)] text-[var(--text-secondary)] border border-[var(--border-color)]">
                 <Icon className="w-5 h-5" />
               </div>
             )}
@@ -82,7 +82,7 @@ export default function StatsCard({
                   <path
                     d={sparklinePath}
                     fill="none"
-                    stroke={isPositive ? '#10b981' : isNegative ? '#ef4444' : '#8b5cf6'}
+                    stroke={isPositive ? 'var(--color-success)' : isNegative ? 'var(--color-danger)' : 'var(--color-purple)'}
                     strokeWidth="1.8"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -103,11 +103,11 @@ export default function StatsCard({
                     >
                       <stop
                         offset="0%"
-                        stopColor={isPositive ? '#10b981' : isNegative ? '#ef4444' : '#8b5cf6'}
+                        stopColor={isPositive ? 'var(--color-success)' : isNegative ? 'var(--color-danger)' : 'var(--color-purple)'}
                       />
                       <stop
                         offset="100%"
-                        stopColor={isPositive ? '#10b981' : isNegative ? '#ef4444' : '#8b5cf6'}
+                        stopColor={isPositive ? 'var(--color-success)' : isNegative ? 'var(--color-danger)' : 'var(--color-purple)'}
                         stopOpacity="0"
                       />
                     </linearGradient>

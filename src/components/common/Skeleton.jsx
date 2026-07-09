@@ -5,7 +5,7 @@ export default function Skeleton({
   variant = 'text', // 'text' | 'circular' | 'rectangular'
   ...props
 }) {
-  const base = 'bg-slate-200 dark:bg-slate-800 animate-pulse';
+  const base = 'bg-[var(--border-medium)] animate-pulse';
   
   const variants = {
     text: 'h-3 w-full rounded',
@@ -25,7 +25,7 @@ export function TableSkeleton({ rows = 5, cols = 4 }) {
   return (
     <div className="w-full space-y-4">
       {/* Header skeleton */}
-      <div className="flex gap-4 px-6 py-4 border-b border-slate-100 dark:border-slate-800/80">
+      <div className="flex gap-4 px-6 py-4 border-b border-[var(--border-color)]">
         {[...Array(cols)].map((_, i) => (
           <Skeleton key={i} variant="text" className={`h-4 ${i === 0 ? 'w-1/4' : 'w-1/6'}`} />
         ))}
@@ -52,7 +52,7 @@ export function TableSkeleton({ rows = 5, cols = 4 }) {
 
 export function CardSkeleton() {
   return (
-    <div className="p-6 border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-2xl space-y-4">
+    <div className="p-6 border border-[var(--border-color)] bg-[var(--bg-surface)] rounded-2xl space-y-4">
       <div className="flex items-center gap-3">
         <Skeleton variant="circular" className="w-10 h-10" />
         <div className="space-y-2 flex-1">

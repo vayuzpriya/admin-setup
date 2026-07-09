@@ -1,0 +1,134 @@
+/* ════════════════════════════════════════════════════════════════════════
+   DASHBOARD MOTION — premium, lightweight, purposeful.
+   Token-based so it works in both light & dark. Respects reduced-motion.
+   Motion communicates: activity · progress · status · attention.
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* ── Page load: gentle fade ─────────────────────────────────────────────── */
+.dash-load { animation: dashFade 400ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes dashFade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ── Sequential entrance for a row of cards (KPI strip) ──────────────────── */
+.dash-stagger > * { animation: dashRise 520ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.dash-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.dash-stagger > *:nth-child(2) { animation-delay: 80ms; }
+.dash-stagger > *:nth-child(3) { animation-delay: 160ms; }
+.dash-stagger > *:nth-child(4) { animation-delay: 240ms; }
+.dash-stagger > *:nth-child(5) { animation-delay: 320ms; }
+.dash-stagger > *:nth-child(6) { animation-delay: 400ms; }
+@keyframes dashRise {
+	from { opacity: 0; transform: translateY(12px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Scroll reveal (paired with use:reveal) ─────────────────────────────── */
+.dash-reveal { opacity: 0; transform: translateY(20px); }
+.dash-reveal.in {
+	opacity: 1; transform: translateY(0);
+	transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+	            transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── LIVE status dot — very subtle breathing pulse ──────────────────────── */
+.live-dot { animation: dashPulse 2.5s ease-in-out infinite; will-change: transform, opacity; }
+@keyframes dashPulse {
+	0%, 100% { transform: scale(1);   opacity: 1; }
+	50%      { transform: scale(1.2); opacity: 0.4; }
+}
+
+/* ── Critical / overdue: soft breathing glow (no flashing) ──────────────── */
+.dash-breath { animation: dashBreath 3s ease-in-out infinite; }
+@keyframes dashBreath {
+	0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-danger) 0%, transparent); }
+	50%      { box-shadow: 0 0 22px 1px color-mix(in srgb, var(--color-danger) 22%, transparent); }
+}
+
+/* ── Ambient dashboard glow — barely noticeable drift behind the KPI row ── */
+.dash-ambient {
+	position: absolute;
+	pointer-events: none;
+	z-index: 0;
+	border-radius: 9999px;
+	filter: blur(70px);
+	opacity: 0.06;
+	background: radial-gradient(circle, var(--color-primary), transparent 70%);
+	animation: dashDrift 20s ease-in-out infinite;
+}
+@keyframes dashDrift {
+	0%, 100% { transform: translate(0, 0) scale(1); }
+	50%      { transform: translate(4%, -3%) scale(1.08); }
+}
+
+/* ── Progress bars: a single shimmer sweep roughly every 15s (not constant) ── */
+.shimmer-15 { position: relative; overflow: hidden; }
+.shimmer-15::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+	transform: translateX(-160%);
+	animation: dashSweep 15s ease-in-out infinite;
+	pointer-events: none;
+}
+@keyframes dashSweep {
+	0%, 90%  { transform: translateX(-160%); }
+	96%      { transform: translateX(160%); }
+	100%     { transform: translateX(160%); }
+}
+
+/* ── Micro-interactions ─────────────────────────────────────────────────── */
+.dash-lift { transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 180ms ease; }
+.dash-lift:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12); }
+
+.lift-2 { transition: transform 150ms cubic-bezier(0.22, 1, 0.36, 1); }
+.lift-2:hover { transform: translateY(-2px); }
+
+.hover-rotate-icon { transition: transform 150ms ease; }
+.group:hover .hover-rotate-icon,
+.hover-rotate-icon:hover { transform: rotate(5deg); }
+
+.badge-glow { transition: box-shadow 150ms ease, transform 150ms ease; }
+.badge-glow:hover { box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 18%, transparent); }
+
+.btn-micro { transition: transform 120ms cubic-bezier(0.34, 1.4, 0.64, 1), box-shadow 120ms ease; }
+.btn-micro:hover { transform: scale(1.02); }
+.btn-micro:active { transform: scale(0.98); }
+
+/* ── Premium gradient border (1px, primary fade) ────────────────────────── */
+.gradient-border { position: relative; }
+.gradient-border::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	padding: 1px;
+	background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 40%, transparent), transparent 60%);
+	-webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+	-webkit-mask-composite: xor;
+	        mask-composite: exclude;
+	pointer-events: none;
+}
+
+/* ── Empty-state subtle float ───────────────────────────────────────────── */
+.dash-float { animation: dashFloat 8s ease-in-out infinite; }
+@keyframes dashFloat {
+	0%, 100% { transform: translateY(0); }
+	50%      { transform: translateY(-6px); }
+}
+
+/* ── Real-time value morph nudge (apply briefly when a number changes) ───── */
+.value-pop { animation: dashValuePop 500ms cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes dashValuePop {
+	0%   { transform: translateY(2px); }
+	60%  { transform: translateY(-2px); }
+	100% { transform: translateY(0); }
+}
+
+/* ── Respect reduced-motion preferences ─────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+	.dash-load, .dash-stagger > *, .live-dot, .dash-breath, .dash-ambient,
+	.shimmer-15::after, .dash-float, .value-pop {
+		animation: none !important;
+	}
+	.dash-reveal { opacity: 1; transform: none; }
+}

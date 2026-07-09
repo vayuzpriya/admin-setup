@@ -10,14 +10,14 @@ export default function EmptyState({
   icon: Icon = DatabaseBackup,
 }) {
   return (
-    <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 border border-dashed border-slate-300 dark:border-slate-800 rounded-2xl bg-white/20 dark:bg-slate-900/10 backdrop-blur-sm">
-      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 mb-5">
+    <div className="flex flex-col items-center justify-center text-center p-8 md:p-12 border border-dashed border-[var(--border-medium)] rounded-2xl bg-[var(--bg-surface-2)] backdrop-blur-sm">
+      <div className="flex items-center justify-center w-14 h-14 rounded-2xl bg-[var(--bg-hover)] text-[var(--text-muted)] mb-5">
         <Icon className="w-7 h-7" />
       </div>
-      <h3 className="text-base font-semibold text-slate-900 dark:text-slate-100 mb-1">
+      <h3 className="text-base font-semibold text-[var(--text-primary)] mb-1">
         {title}
       </h3>
-      <p className="text-sm text-slate-500 dark:text-slate-400 max-w-sm mb-6">
+      <p className="text-sm text-[var(--text-muted)] max-w-sm mb-6">
         {description}
       </p>
       {onAction && actionLabel && (
@@ -25,7 +25,6 @@ export default function EmptyState({
           variant="primary"
           icon={Plus}
           onClick={onAction}
-          className="shadow-sm shadow-brand-500/10"
         >
           {actionLabel}
         </Button>

@@ -1,23 +1,73 @@
+/* Fonts used by the VAYUZ design system (--font-display / --font-body) */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+/* Canonical design-token source: light + dark CSS custom properties */
+@import "./rex-design-system.css";
+
+/* App-wide motion & hover polish (already token-based) */
+@import "./dynamic-ui.css";
+
+/* Tailwind's dark: variant piggybacks on the same [data-theme="dark"]
+   attribute the token system uses, so one switch drives both. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
   --font-sans: 'Inter', system-ui, sans-serif;
-  
-  --color-brand-50: #f5f3ff;
-  --color-brand-100: #ede9fe;
-  --color-brand-200: #ddd6fe;
-  --color-brand-300: #c084fc;
-  --color-brand-400: #a855f7;
-  --color-brand-500: #8b5cf6;
-  --color-brand-600: #7c3aed;
-  --color-brand-700: #6d28d9;
-  --color-brand-800: #5b21b6;
-  --color-brand-900: #4c1d95;
-  --color-brand-950: #2e1065;
+  --font-display: 'Syne', sans-serif;
 
-  --color-slate-950: #030712;
+  /* Brand scale resolves to the approved primary-color tokens so every
+     existing brand-* utility (bg-brand-500, text-brand-600, ring-brand-500...)
+     stays in sync with the light/dark token values automatically. */
+  --color-brand-50:  var(--color-orange-50);
+  --color-brand-100: var(--color-primary-light);
+  --color-brand-200: var(--color-orange-100);
+  --color-brand-300: var(--color-primary-alt);
+  --color-brand-400: var(--color-primary-alt);
+  --color-brand-500: var(--color-primary);
+  --color-brand-600: var(--color-primary);
+  --color-brand-700: var(--color-primary-hover);
+  --color-brand-800: var(--color-primary-dark);
+  --color-brand-900: var(--color-primary-dark);
+  --color-brand-950: var(--color-primary-dark);
+
+  /* Semantic status scales resolve to the approved status tokens */
+  --color-emerald-50:  var(--color-success-bg);
+  --color-emerald-100: var(--color-success-bg);
+  --color-emerald-400: var(--color-success);
+  --color-emerald-500: var(--color-success);
+  --color-emerald-600: var(--color-success-dark);
+  --color-emerald-700: var(--color-success-dark);
+
+  --color-amber-50:  var(--color-warning-bg);
+  --color-amber-100: var(--color-warning-bg);
+  --color-amber-400: var(--color-warning);
+  --color-amber-500: var(--color-warning);
+  --color-amber-600: var(--color-warning);
+  --color-amber-700: var(--color-warning);
+
+  --color-red-50:  var(--color-danger-bg);
+  --color-red-100: var(--color-danger-bg);
+  --color-red-400: var(--color-danger);
+  --color-red-500: var(--color-danger);
+  --color-red-600: var(--color-danger);
+  --color-red-700: var(--color-danger-dark);
+
+  --color-sky-50:  var(--color-info-bg);
+  --color-sky-100: var(--color-info-bg);
+  --color-sky-400: var(--color-info);
+  --color-sky-500: var(--color-info);
+  --color-sky-600: var(--color-info);
+  --color-sky-700: var(--color-info);
+
+  --color-purple-400: var(--color-purple);
+  --color-purple-500: var(--color-purple);
+  --color-purple-600: var(--color-purple);
+
+  --color-indigo-400: var(--color-indigo);
+  --color-indigo-500: var(--color-indigo);
+  --color-indigo-600: var(--color-indigo);
 
   --animate-fade-in-up: fadeInUp 0.3s ease-out forwards;
   --animate-fade-in: fadeIn 0.2s ease-out forwards;
@@ -41,30 +91,10 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom premium scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 9999px;
-}
-.dark ::-webkit-scrollbar-thumb {
-  background: #1e293b;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
-}
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: #334155;
-}
-
 @layer base {
   body {
-    @apply antialiased text-slate-800 bg-slate-50 dark:text-slate-200 dark:bg-slate-950 transition-colors duration-200 font-sans;
+    @apply antialiased font-sans transition-colors duration-200;
+    color: var(--text-primary);
+    background-color: var(--bg-page);
   }
 }

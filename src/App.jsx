@@ -21,7 +21,9 @@ import {
   Clipboard,
   AlertTriangle,
   Key,
-  Check
+  Check,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 // Layout & Common components
@@ -93,16 +95,13 @@ export default function App() {
     mfa: true,
   });
 
-  // Effect to apply dark mode class
+  // Effect to apply the light/dark theme. The token stylesheet and Tailwind's
+  // dark: variant both key off the [data-theme] attribute, so this one line
+  // switches every themed color across the app.
   useEffect(() => {
-    const root = window.document.documentElement;
-    if (isDarkMode) {
-      root.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      root.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    const theme = isDarkMode ? 'dark' : 'light';
+    window.document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }, [isDarkMode]);
 
   // Toast Helpers
@@ -208,7 +207,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans flex relative overflow-hidden">
+    <div className="min-h-screen bg-[var(--bg-page)] font-sans flex relative overflow-hidden">
       {/* Background glowing gradients */}
       <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-brand-500/10 dark:bg-brand-500/5 blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-purple-500/10 dark:bg-purple-500/5 blur-[120px] pointer-events-none" />
@@ -247,10 +246,10 @@ export default function App() {
             <div className="space-y-8 animate-fade-in">
               {/* Heading */}
               <div>
-                <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-55 tracking-tight mb-1.5 flex items-center gap-2">
-                  Recruiting Overview <Sparkles className="w-5 h-5 text-brand-500" />
+                <h1 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight mb-1.5 flex items-center gap-2">
+                  Recruiting Overview <Sparkles className="w-5 h-5 text-[var(--color-primary)]" />
                 </h1>
-                <p className="text-sm text-slate-455 dark:text-slate-500">
+                <p className="text-sm text-[var(--text-muted)]">
                   Track talent acquisition metrics, weekly activity, and API sourcing integrations.
                 </p>
               </div>
@@ -298,7 +297,7 @@ export default function App() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Skeletons Demo */}
                 <div className="lg:col-span-1 space-y-6">
-                  <div className="text-xs font-semibold text-slate-455 uppercase tracking-wider">Loading Skeletons Demo</div>
+                  <div className="text-xs font-semibold text-[var(--text-label)] uppercase tracking-wider">Loading Skeletons Demo</div>
                   <Skeleton variant="text" className="w-2/3 h-4" />
                   <div className="flex items-center gap-3">
                     <Skeleton variant="circular" className="w-10 h-10" />
@@ -312,7 +311,7 @@ export default function App() {
 
                 {/* Empty State Demo */}
                 <div className="lg:col-span-2 space-y-6">
-                  <div className="text-xs font-semibold text-slate-455 uppercase tracking-wider">Empty State Template</div>
+                  <div className="text-xs font-semibold text-[var(--text-label)] uppercase tracking-wider">Empty State Template</div>
                   <EmptyState
                     title="No Interview slots set"
                     description="You currently do not have any candidate interview slots locked in for today."
@@ -328,10 +327,10 @@ export default function App() {
             <div className="space-y-6 animate-fade-in">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-50 tracking-tight mb-1.5">
+                  <h1 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight mb-1.5">
                     User Management (Candidates)
                   </h1>
-                  <p className="text-sm text-slate-455 dark:text-slate-500">
+                  <p className="text-sm text-[var(--text-muted)]">
                     Manage applicant profiles, interview stages, and target job postings using full search, filters, and tables.
                   </p>
                 </div>
@@ -339,7 +338,7 @@ export default function App() {
                   variant="primary"
                   icon={Plus}
                   onClick={handleAddNewUser}
-                  className="shadow-sm shadow-brand-500/10"
+                  className="shadow-sm shadow-[var(--color-orange-shadow)]"
                 >
                   Add Candidate
                 </Button>
@@ -369,20 +368,20 @@ export default function App() {
           {activeTab === 'overlays' && (
             <div className="space-y-8 animate-fade-in">
               <div>
-                <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-55 tracking-tight mb-1.5">
+                <h1 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight mb-1.5">
                   Overlays & Modal Dialogs
                 </h1>
-                <p className="text-sm text-slate-455 dark:text-slate-500">
+                <p className="text-sm text-[var(--text-muted)]">
                   Trigger and verify drawer overlays, modals, and dangerous action confirmation windows.
                 </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <Card hoverEffect>
                   <CardHeader>
-                    <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Slide-over Drawer</h3>
+                    <h3 className="text-sm font-semibold text-[var(--text-primary)]">Slide-over Drawer</h3>
                   </CardHeader>
                   <CardBody className="p-6 text-center space-y-4">
-                    <p className="text-xs text-slate-500 dark:text-slate-455">Renders candidate log details panel sliding from the right screen boundary.</p>
+                    <p className="text-xs text-[var(--text-muted)]">Renders candidate log details panel sliding from the right screen boundary.</p>
                     <Button variant="outline" size="sm" onClick={() => {
                       setSelectedUserForDetail(users[0]);
                       setIsDrawerOpen(true);
@@ -391,19 +390,19 @@ export default function App() {
                 </Card>
                 <Card hoverEffect>
                   <CardHeader>
-                    <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Standard Modal Dialog</h3>
+                    <h3 className="text-sm font-semibold text-[var(--text-primary)]">Standard Modal Dialog</h3>
                   </CardHeader>
                   <CardBody className="p-6 text-center space-y-4">
-                    <p className="text-xs text-slate-500 dark:text-slate-455">Displays focus modal boxes, overlay backdrops, and form actions.</p>
+                    <p className="text-xs text-[var(--text-muted)]">Displays focus modal boxes, overlay backdrops, and form actions.</p>
                     <Button variant="outline" size="sm" onClick={() => setIsUserModalOpen(true)}>Open Sample Modal</Button>
                   </CardBody>
                 </Card>
                 <Card hoverEffect>
                   <CardHeader>
-                    <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Confirmation Dialog</h3>
+                    <h3 className="text-sm font-semibold text-[var(--text-primary)]">Confirmation Dialog</h3>
                   </CardHeader>
                   <CardBody className="p-6 text-center space-y-4">
-                    <p className="text-xs text-slate-500 dark:text-slate-455">Presents safety alerts before carrying out dangerous/critical deletions.</p>
+                    <p className="text-xs text-[var(--text-muted)]">Presents safety alerts before carrying out dangerous/critical deletions.</p>
                     <Button variant="danger" size="sm" onClick={() => {
                       setSelectedUserForDelete(1);
                       setIsConfirmOpen(true);
@@ -417,29 +416,29 @@ export default function App() {
           {activeTab === 'toasts' && (
             <div className="space-y-8 animate-fade-in">
               <div>
-                <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-55 tracking-tight mb-1.5">
+                <h1 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight mb-1.5">
                   Toast Notification Alerts
                 </h1>
-                <p className="text-sm text-slate-455 dark:text-slate-500">
+                <p className="text-sm text-[var(--text-muted)]">
                   Trigger success and error notification boxes displaying status signals.
                 </p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <Card hoverEffect>
                   <CardHeader>
-                    <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Success Toast</h3>
+                    <h3 className="text-sm font-semibold text-[var(--text-primary)]">Success Toast</h3>
                   </CardHeader>
                   <CardBody className="p-6 flex flex-col items-center gap-4">
-                    <p className="text-xs text-slate-500 dark:text-slate-455 text-center">Trigger a success check popup.</p>
+                    <p className="text-xs text-[var(--text-muted)] text-center">Trigger a success check popup.</p>
                     <Button variant="primary" onClick={() => addToast('Candidate invitation sent to Sophia Rodriguez.', 'success')}>Trigger Success Toast</Button>
                   </CardBody>
                 </Card>
                 <Card hoverEffect>
                   <CardHeader>
-                    <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Error Toast</h3>
+                    <h3 className="text-sm font-semibold text-[var(--text-primary)]">Error Toast</h3>
                   </CardHeader>
                   <CardBody className="p-6 flex flex-col items-center gap-4">
-                    <p className="text-xs text-slate-500 dark:text-slate-455 text-center">Trigger an error warn block.</p>
+                    <p className="text-xs text-[var(--text-muted)] text-center">Trigger an error warn block.</p>
                     <Button variant="danger" onClick={() => addToast('LinkedIn API connections timed out after 30000ms.', 'error')}>Trigger Error Toast</Button>
                   </CardBody>
                 </Card>
@@ -462,10 +461,10 @@ export default function App() {
           {activeTab === 'settings' && (
             <div className="space-y-6 animate-fade-in">
               <div>
-                <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-55">
+                <h1 className="text-2xl font-bold text-[var(--text-primary)]">
                   Global Settings
                 </h1>
-                <p className="text-sm text-slate-455 dark:text-slate-500">
+                <p className="text-sm text-[var(--text-muted)]">
                   Update recruiting owner profiles, API keys, and notification triggers.
                 </p>
               </div>
@@ -474,28 +473,28 @@ export default function App() {
                 <div className="md:col-span-2 space-y-6">
                   <Card>
                     <CardHeader>
-                      <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+                      <h3 className="text-base font-semibold text-[var(--text-primary)]">
                         Profile Information
                       </h3>
                     </CardHeader>
                     <CardBody className="p-6 space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                          <label className="text-xs font-semibold text-slate-450 dark:text-slate-500 uppercase tracking-wider block">Full Name</label>
+                          <label className="text-xs font-semibold text-[var(--text-label)] uppercase tracking-wider block">Full Name</label>
                           <input
                             type="text"
                             value={profileSettings.name}
                             onChange={(e) => setProfileSettings({ ...profileSettings, name: e.target.value })}
-                            className="w-full h-10 px-3 text-sm rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 dark:text-slate-200"
+                            className="w-full h-10 px-3 text-sm rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] text-[var(--text-primary)]"
                           />
                         </div>
                         <div className="space-y-1.5">
-                          <label className="text-xs font-semibold text-slate-455 dark:text-slate-500 uppercase tracking-wider block">Email Address</label>
+                          <label className="text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider block">Email Address</label>
                           <input
                             type="email"
                             value={profileSettings.email}
                             onChange={(e) => setProfileSettings({ ...profileSettings, email: e.target.value })}
-                            className="w-full h-10 px-3 text-sm rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 dark:text-slate-200"
+                            className="w-full h-10 px-3 text-sm rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] text-[var(--text-primary)]"
                           />
                         </div>
                       </div>
@@ -505,6 +504,54 @@ export default function App() {
                         Save Changes
                       </Button>
                     </CardFooter>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <h3 className="text-base font-semibold text-[var(--text-primary)]">
+                        Appearance
+                      </h3>
+                    </CardHeader>
+                    <CardBody className="p-6 flex items-center justify-between gap-4 flex-wrap">
+                      <div>
+                        <h4 className="text-sm font-semibold text-[var(--text-primary)]">Theme</h4>
+                        <p className="text-xs text-[var(--text-muted)]">Choose how RexAdmin looks on this device.</p>
+                      </div>
+                      <div className="flex rounded-xl border border-[var(--border-color)] p-1 bg-[var(--bg-surface-2)]">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsDarkMode(false);
+                            addToast('Light theme enabled.', 'info');
+                          }}
+                          aria-pressed={!isDarkMode}
+                          className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                            !isDarkMode
+                              ? 'bg-[var(--color-primary)] text-white shadow-sm'
+                              : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
+                          }`}
+                        >
+                          <Sun className="w-3.5 h-3.5" />
+                          Light
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setIsDarkMode(true);
+                            addToast('Dark theme enabled.', 'info');
+                          }}
+                          aria-pressed={isDarkMode}
+                          className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                            isDarkMode
+                              ? 'bg-[var(--color-primary)] text-white shadow-sm'
+                              : 'text-[var(--text-muted)] hover:text-[var(--text-primary)]'
+                          }`}
+                        >
+                          <Moon className="w-3.5 h-3.5" />
+                          Dark
+                        </button>
+                      </div>
+                    </CardBody>
                   </Card>
                 </div>
 
@@ -517,8 +564,8 @@ export default function App() {
                         size="xl"
                       />
                       <div>
-                        <h3 className="text-base font-bold text-slate-900 dark:text-slate-55">{profileSettings.name}</h3>
-                        <p className="text-xs text-slate-400 dark:text-slate-500">{profileSettings.email}</p>
+                        <h3 className="text-base font-bold text-[var(--text-primary)]">{profileSettings.name}</h3>
+                        <p className="text-xs text-[var(--text-muted)]">{profileSettings.email}</p>
                       </div>
                       <Badge variant="brand">Recruiting Owner</Badge>
                     </CardBody>
@@ -531,10 +578,10 @@ export default function App() {
           {activeTab === 'help' && (
             <div className="space-y-6 animate-fade-in">
               <div>
-                <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-55 tracking-tight mb-1.5 flex items-center gap-2">
-                  Developer Documentation <BookOpen className="w-5 h-5 text-brand-500" />
+                <h1 className="text-2xl font-bold text-[var(--text-primary)] tracking-tight mb-1.5 flex items-center gap-2">
+                  Developer Documentation <BookOpen className="w-5 h-5 text-[var(--color-primary)]" />
                 </h1>
-                <p className="text-sm text-slate-450 dark:text-slate-500">
+                <p className="text-sm text-[var(--text-label)]">
                   Quick start guidelines, API structures, and components usage.
                 </p>
               </div>
@@ -542,16 +589,16 @@ export default function App() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card>
                   <CardHeader>
-                    <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+                    <h3 className="text-base font-semibold text-[var(--text-primary)]">
                       Clean Component Design
                     </h3>
                   </CardHeader>
-                  <CardBody className="p-6 text-sm text-slate-600 dark:text-slate-400 space-y-3">
+                  <CardBody className="p-6 text-sm text-[var(--text-secondary)] space-y-3">
                     <p>
-                      The RexRecruit components follow functional designs using Tailwind CSS utilities. Do not install external stylesheet dependencies.
+                      The RexRecruit components follow functional designs using Tailwind CSS utilities bound to design tokens. Do not install external stylesheet dependencies.
                     </p>
-                    <div className="bg-slate-50 dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
-                      <code className="text-xs text-slate-800 dark:text-slate-300">
+                    <div className="bg-[var(--bg-surface-2)] p-3 rounded-xl border border-[var(--border-color)]">
+                      <code className="text-xs text-[var(--text-primary)]">
                         {`import Button from './components/common/Button';\n\n<Button variant="primary">Add Candidate</Button>`}
                       </code>
                     </div>
@@ -560,17 +607,17 @@ export default function App() {
 
                 <Card>
                   <CardHeader>
-                    <h3 className="text-base font-semibold text-slate-900 dark:text-slate-50">
+                    <h3 className="text-base font-semibold text-[var(--text-primary)]">
                       Theme Tokens (Dark/Light)
                     </h3>
                   </CardHeader>
-                  <CardBody className="p-6 text-sm text-slate-600 dark:text-slate-400 space-y-3">
+                  <CardBody className="p-6 text-sm text-[var(--text-secondary)] space-y-3">
                     <p>
-                      Toggle light and dark palettes by binding a toggle state that attaches the class <code className="text-xs bg-slate-100 dark:bg-slate-800 px-1 py-0.5 rounded text-slate-950 dark:text-slate-200">.dark</code> to the html element.
+                      Every color resolves to a CSS variable defined in <code className="text-xs bg-[var(--bg-surface-2)] px-1 py-0.5 rounded text-[var(--text-primary)]">rex-design-system.css</code>. Switching themes sets <code className="text-xs bg-[var(--bg-surface-2)] px-1 py-0.5 rounded text-[var(--text-primary)]">data-theme</code> on the html element — no per-component dark: overrides needed.
                     </p>
-                    <div className="bg-slate-50 dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200 dark:border-slate-800">
-                      <code className="text-xs text-slate-800 dark:text-slate-300">
-                        {`<div className="bg-white dark:bg-slate-900">\n  <span className="text-slate-900 dark:text-slate-55" />\n</div>`}
+                    <div className="bg-[var(--bg-surface-2)] p-3 rounded-xl border border-[var(--border-color)]">
+                      <code className="text-xs text-[var(--text-primary)]">
+                        {`<div className="bg-[var(--bg-surface)]">\n  <span className="text-[var(--text-primary)]" />\n</div>`}
                       </code>
                     </div>
                   </CardBody>
@@ -603,47 +650,47 @@ export default function App() {
       >
         <form onSubmit={handleSaveUser} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-450 dark:text-slate-550 uppercase tracking-wider block">Full Name</label>
+            <label className="text-xs font-semibold text-[var(--text-label)] uppercase tracking-wider block">Full Name</label>
             <input
               type="text"
               placeholder="e.g. Sophia Rodriguez"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full h-10 px-3 text-sm rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 dark:text-slate-200"
+              className="w-full h-10 px-3 text-sm rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] text-[var(--text-primary)]"
               required
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-455 dark:text-slate-555 uppercase tracking-wider block">Email Address</label>
+            <label className="text-xs font-semibold text-[var(--text-label)] uppercase tracking-wider block">Email Address</label>
             <input
               type="email"
               placeholder="e.g. sophia.rod@gmail.com"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full h-10 px-3 text-sm rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 dark:text-slate-200"
+              className="w-full h-10 px-3 text-sm rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] text-[var(--text-primary)]"
               required
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-455 dark:text-slate-555 uppercase tracking-wider block">Target Position</label>
+            <label className="text-xs font-semibold text-[var(--text-label)] uppercase tracking-wider block">Target Position</label>
             <input
               type="text"
               placeholder="e.g. Senior Frontend Architect"
               value={formData.role}
               onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-              className="w-full h-10 px-3 text-sm rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 dark:text-slate-200"
+              className="w-full h-10 px-3 text-sm rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] text-[var(--text-primary)]"
               required
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold text-slate-455 dark:text-slate-555 uppercase tracking-wider block">Interview Stage</label>
+            <label className="text-xs font-semibold text-[var(--text-label)] uppercase tracking-wider block">Interview Stage</label>
             <select
               value={formData.status}
               onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-              className="w-full h-10 px-3 text-sm rounded-xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 dark:text-slate-200 cursor-pointer"
+              className="w-full h-10 px-3 text-sm rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] text-[var(--text-primary)] cursor-pointer"
             >
               <option value="Applied">Applied</option>
               <option value="Interviewing">Interviewing</option>
@@ -666,17 +713,17 @@ export default function App() {
         }
       >
         <div className="space-y-4">
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <p className="text-sm text-[var(--text-muted)]">
             Quick configuration options for the RexRecruit dashboard view.
           </p>
-          <div className="p-4 bg-slate-50 dark:bg-slate-900/60 rounded-xl space-y-2 border border-slate-100 dark:border-slate-850">
+          <div className="p-4 bg-[var(--bg-surface-2)] rounded-xl space-y-2 border border-[var(--border-color)]">
             <div className="flex justify-between items-center text-xs">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Dark Mode Status:</span>
+              <span className="font-semibold text-[var(--text-secondary)]">Dark Mode Status:</span>
               <Badge variant={isDarkMode ? 'brand' : 'neutral'}>{isDarkMode ? 'Enabled' : 'Disabled'}</Badge>
             </div>
             <div className="flex justify-between items-center text-xs pt-1">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Active Job Board Integrations:</span>
-              <span className="font-mono text-slate-600 dark:text-slate-400">{dbReplicaList.length} Connected APIs</span>
+              <span className="font-semibold text-[var(--text-secondary)]">Active Job Board Integrations:</span>
+              <span className="font-mono text-[var(--text-secondary)]">{dbReplicaList.length} Connected APIs</span>
             </div>
           </div>
         </div>
@@ -701,26 +748,26 @@ export default function App() {
       >
         {selectedUserForDetail ? (
           <div className="space-y-6 animate-fade-in">
-            <div className="flex items-center gap-4 border-b border-slate-100 dark:border-slate-800 pb-5">
+            <div className="flex items-center gap-4 border-b border-[var(--border-color)] pb-5">
               <Avatar src={selectedUserForDetail.avatar} name={selectedUserForDetail.name} size="xl" />
               <div className="space-y-1">
-                <h4 className="text-base font-bold text-slate-900 dark:text-slate-50">{selectedUserForDetail.name}</h4>
-                <p className="text-xs text-slate-400">{selectedUserForDetail.email}</p>
+                <h4 className="text-base font-bold text-[var(--text-primary)]">{selectedUserForDetail.name}</h4>
+                <p className="text-xs text-[var(--text-muted)]">{selectedUserForDetail.email}</p>
                 <Badge variant="brand">{selectedUserForDetail.role}</Badge>
               </div>
             </div>
             <div className="space-y-4 text-xs">
               <div className="flex justify-between">
-                <span className="font-semibold text-slate-400">Application Date:</span>
-                <span className="text-slate-800 dark:text-slate-200">{selectedUserForDetail.joinDate}</span>
+                <span className="font-semibold text-[var(--text-muted)]">Application Date:</span>
+                <span className="text-[var(--text-primary)]">{selectedUserForDetail.joinDate}</span>
               </div>
               <div className="flex justify-between">
-                <span className="font-semibold text-slate-400">Verification ID:</span>
-                <span className="font-mono text-slate-655 dark:text-slate-400">USR-0028{selectedUserForDetail.id}</span>
+                <span className="font-semibold text-[var(--text-muted)]">Verification ID:</span>
+                <span className="font-mono text-[var(--text-secondary)]">USR-0028{selectedUserForDetail.id}</span>
               </div>
               <div className="space-y-1.5 pt-2">
-                <span className="font-semibold text-slate-400 block">System Activity Logs:</span>
-                <div className="bg-slate-50 dark:bg-slate-950/60 p-3 rounded-xl border border-slate-200 dark:border-slate-800 text-[10px] leading-relaxed font-mono">
+                <span className="font-semibold text-[var(--text-muted)] block">System Activity Logs:</span>
+                <div className="bg-[var(--bg-inverse)] text-white p-3 rounded-xl border border-[var(--border-color)] text-[10px] leading-relaxed font-mono">
                   <div>[14:52:10] Resume parse task: extracted 12 skills.</div>
                   <div>[14:55:00] Automated skills match score: 94.2%.</div>
                   <div>[15:10:00] Stage advanced to: {selectedUserForDetail.status}.</div>
@@ -729,7 +776,7 @@ export default function App() {
             </div>
           </div>
         ) : (
-          <div className="text-center py-10 text-slate-400">No profile selected.</div>
+          <div className="text-center py-10 text-[var(--text-muted)]">No profile selected.</div>
         )}
       </Drawer>
 

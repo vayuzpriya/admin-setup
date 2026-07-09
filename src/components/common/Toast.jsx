@@ -16,17 +16,17 @@ export default function Toast({
   }, [id, duration, onClose]);
 
   const icons = {
-    success: <CheckCircle2 className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />,
-    warning: <AlertTriangle className="w-5 h-5 text-amber-500 dark:text-amber-400" />,
-    error: <AlertCircle className="w-5 h-5 text-red-500 dark:text-red-400" />,
-    info: <Info className="w-5 h-5 text-sky-500 dark:text-sky-400" />,
+    success: <CheckCircle2 className="w-5 h-5 text-[var(--color-success)]" />,
+    warning: <AlertTriangle className="w-5 h-5 text-[var(--color-warning)]" />,
+    error: <AlertCircle className="w-5 h-5 text-[var(--color-danger)]" />,
+    info: <Info className="w-5 h-5 text-[var(--color-info)]" />,
   };
 
   const borders = {
-    success: 'border-emerald-100 dark:border-emerald-950 bg-emerald-50/80 dark:bg-emerald-950/20',
-    warning: 'border-amber-100 dark:border-amber-950 bg-amber-50/80 dark:bg-amber-950/20',
-    error: 'border-red-100 dark:border-red-950 bg-red-50/80 dark:bg-red-950/20',
-    info: 'border-sky-100 dark:border-sky-950 bg-sky-50/80 dark:bg-sky-950/20',
+    success: 'border-[var(--color-success-border)] bg-[var(--color-success-bg)]',
+    warning: 'border-transparent bg-[var(--color-warning-bg)]',
+    error: 'border-transparent bg-[var(--color-danger-bg)]',
+    info: 'border-transparent bg-[var(--color-info-bg)]',
   };
 
   return (
@@ -35,12 +35,12 @@ export default function Toast({
       role="alert"
     >
       <div className="flex-shrink-0">{icons[type]}</div>
-      <div className="flex-1 text-sm font-medium text-slate-800 dark:text-slate-200">
+      <div className="flex-1 text-sm font-medium text-[var(--text-primary)]">
         {message}
       </div>
       <button
         onClick={() => onClose(id)}
-        className="flex-shrink-0 text-slate-400 hover:text-slate-655 dark:hover:text-slate-200 p-0.5 rounded-lg hover:bg-slate-200/50 dark:hover:bg-slate-800/50 transition-colors"
+        className="flex-shrink-0 text-[var(--text-muted)] hover:text-[var(--text-primary)] p-0.5 rounded-lg hover:bg-[var(--bg-hover)] transition-colors"
         aria-label="Close notification"
       >
         <X className="w-4 h-4" />

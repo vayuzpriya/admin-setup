@@ -11,14 +11,14 @@ export default function Button({
   iconPosition = 'left',
   ...props
 }) {
-  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]';
-  
+  const baseStyles = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-primary)] focus:ring-offset-[var(--bg-surface)] disabled:opacity-50 disabled:pointer-events-none active:scale-[0.98]';
+
   const variants = {
-    primary: 'bg-brand-600 hover:bg-brand-700 text-white shadow-sm shadow-brand-500/10 focus:ring-offset-white dark:focus:ring-offset-slate-900',
-    secondary: 'bg-slate-100 hover:bg-slate-200 text-slate-900 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-slate-100 focus:ring-offset-white dark:focus:ring-offset-slate-900',
-    outline: 'border border-slate-300 hover:bg-slate-50 text-slate-700 dark:border-slate-700 dark:hover:bg-slate-800 dark:text-slate-300 focus:ring-offset-white dark:focus:ring-offset-slate-900',
-    ghost: 'hover:bg-slate-100 text-slate-700 hover:text-slate-900 dark:hover:bg-slate-800 dark:text-slate-300 dark:hover:text-slate-100',
-    danger: 'bg-red-600 hover:bg-red-700 text-white shadow-sm focus:ring-red-500 focus:ring-offset-white dark:focus:ring-offset-slate-900',
+    primary: 'bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white shadow-sm shadow-[var(--color-orange-shadow)]',
+    secondary: 'bg-[var(--bg-surface-2)] hover:bg-[var(--bg-hover)] text-[var(--text-primary)]',
+    outline: 'border border-[var(--border-color)] hover:bg-[var(--bg-hover)] text-[var(--text-secondary)]',
+    ghost: 'hover:bg-[var(--bg-hover)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]',
+    danger: 'bg-[var(--color-danger)] hover:bg-[var(--color-danger-dark)] text-white shadow-sm focus:ring-[var(--color-danger)]',
   };
 
   const sizes = {

@@ -32,7 +32,7 @@ export default function Dropdown({
 
       {isOpen && (
         <div
-          className={`absolute mt-2 w-56 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50 transition-all duration-200 animate-fade-in-up ${alignments[align]}`}
+          className={`absolute mt-2 w-56 rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] shadow-lg focus:outline-none z-50 transition-all duration-200 animate-fade-in-up ${alignments[align]}`}
           onClick={() => setIsOpen(false)}
         >
           <div className="py-1.5" role="menu" aria-orientation="vertical">
@@ -56,11 +56,11 @@ export function DropdownItem({
     <button
       onClick={onClick}
       disabled={disabled}
-      className={`w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-350 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:text-slate-950 dark:hover:text-slate-100 transition-colors flex items-center gap-2.5 disabled:opacity-50 disabled:pointer-events-none ${className}`}
+      className={`w-full text-left px-4 py-2 text-sm text-[var(--text-secondary)] hover:bg-[var(--bg-hover)] hover:text-[var(--text-primary)] transition-colors flex items-center gap-2.5 disabled:opacity-50 disabled:pointer-events-none ${className}`}
       role="menuitem"
       {...props}
     >
-      {Icon && <Icon className="w-4 h-4 text-slate-450 dark:text-slate-500" />}
+      {Icon && <Icon className="w-4 h-4 text-[var(--text-muted)]" />}
       {children}
     </button>
   );
@@ -68,12 +68,12 @@ export function DropdownItem({
 
 export function DropdownHeader({ children, className = '' }) {
   return (
-    <div className={`px-4 py-2 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider ${className}`}>
+    <div className={`px-4 py-2 text-xs font-semibold text-[var(--text-muted)] uppercase tracking-wider ${className}`}>
       {children}
     </div>
   );
 }
 
 export function DropdownDivider() {
-  return <div className="border-t border-slate-100 dark:border-slate-800/80 my-1.5" />;
+  return <div className="border-t border-[var(--border-color)] my-1.5" />;
 }

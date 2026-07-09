@@ -8,8 +8,8 @@ export default function Card({
 }) {
   return (
     <div
-      className={`bg-white dark:bg-slate-900/50 backdrop-blur-md border border-slate-200 dark:border-slate-800/80 rounded-2xl shadow-sm transition-all duration-300 ${
-        hoverEffect ? 'hover:shadow-md hover:border-slate-300 dark:hover:border-slate-700/80 hover:-translate-y-0.5' : ''
+      className={`bg-[var(--bg-surface)] backdrop-blur-md border border-[var(--border-color)] rounded-2xl shadow-sm transition-all duration-300 ${
+        hoverEffect ? 'hover:shadow-md hover:border-[var(--border-medium)] hover:-translate-y-0.5' : ''
       } ${className}`}
       {...props}
     >
@@ -20,7 +20,7 @@ export default function Card({
 
 export function CardHeader({ children, className = '', ...props }) {
   return (
-    <div className={`px-6 py-5 border-b border-slate-100 dark:border-slate-800/80 ${className}`} {...props}>
+    <div className={`px-6 py-5 border-b border-[var(--border-color)] ${className}`} {...props}>
       {children}
     </div>
   );
@@ -36,7 +36,7 @@ export function CardBody({ children, className = '', ...props }) {
 
 export function CardFooter({ children, className = '', ...props }) {
   return (
-    <div className={`px-6 py-4 border-t border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-900/20 rounded-b-2xl ${className}`} {...props}>
+    <div className={`px-6 py-4 border-t border-[var(--border-color)] bg-[var(--bg-surface-2)] rounded-b-2xl ${className}`} {...props}>
       {children}
     </div>
   );
