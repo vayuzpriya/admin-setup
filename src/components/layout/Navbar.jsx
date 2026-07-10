@@ -1,45 +1,40 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { Menu, Search, Bell, ChevronDown, User, Settings, CreditCard, LogOut, Plus } from 'lucide-react';
 import Avatar from '../common/Avatar';
 import Dropdown, { DropdownItem, DropdownHeader, DropdownDivider } from '../common/Dropdown';
 import Button from '../common/Button';
 
+const ROUTE_LABELS = {
+  '/': 'Overview',
+  '/organizations': 'Organization Management',
+  '/users': 'Staff Management',
+  '/roles': 'Role Management',
+  '/forms': 'Form Components Showcase',
+  '/overlays': 'Drawer & Modals Showcase',
+  '/toasts': 'Toast Alerts Showcase',
+  '/permission': 'Access Denied (403)',
+  '/errors': 'System Errors (404/500)',
+  '/login': 'Corporate Login Screen',
+  '/settings': 'Global Settings',
+  '/help': 'Documentation',
+};
+
 export default function Navbar({
   isSidebarCollapsed,
   setIsSidebarCollapsed,
-  activeTab,
   onOpenSettings,
   onTriggerNotification,
   onAddNewItem,
 }) {
-  const getTabLabel = () => {
-    switch (activeTab) {
-      case 'dashboard':
-        return 'Overview';
-      case 'users':
-        return 'Staff Management';
-      case 'roles':
-        return 'Role Management';
-      case 'forms':
-        return 'Form Components Showcase';
-      case 'overlays':
-        return 'Drawer & Modals Showcase';
-      case 'toasts':
-        return 'Toast Alerts Showcase';
-      case 'permission':
-        return 'Access Denied (403)';
-      case 'errors':
-        return 'System Errors (404/500)';
-      case 'login':
-        return 'Corporate Login Screen';
-      case 'settings':
-        return 'Global Settings';
-      case 'help':
-        return 'Documentation';
-      default:
-        return 'Dashboard';
-    }
-  };
+  const { pathname } = useLocation();
+  const tabLabel =
+    ROUTE_LABELS[pathname] ||
+    (pathname === '/organizations/new'
+      ? 'Create New Organization'
+      : pathname.startsWith('/organizations/')
+        ? 'Organization Details'
+        : 'Dashboard');
 
   return (
     <header className="bg-gradient-brand sticky top-0 z-35 flex h-16 w-full items-center justify-between px-6 transition-all duration-200">
@@ -57,7 +52,7 @@ export default function Navbar({
         <nav className="hidden sm:flex items-center space-x-2 text-sm font-medium text-white/60">
           <span className="hover:text-white cursor-pointer">Workspace</span>
           <span>/</span>
-          <span className="text-white font-semibold">{getTabLabel()}</span>
+          <span className="text-white font-semibold">{tabLabel}</span>
         </nav>
       </div>
 

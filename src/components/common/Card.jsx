@@ -4,13 +4,14 @@ export default function Card({
   children,
   className = '',
   hoverEffect = false,
+  selected = false,
   ...props
 }) {
   return (
     <div
       className={`bg-[var(--bg-surface)] backdrop-blur-md border border-[var(--border-color)] rounded-2xl shadow-sm transition-all duration-300 ${
         hoverEffect ? 'hover:shadow-md hover:border-[var(--border-medium)] hover:-translate-y-0.5' : ''
-      } ${className}`}
+      } ${selected ? 'active-choice template-active' : ''} ${className}`}
       {...props}
     >
       {children}

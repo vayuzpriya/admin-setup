@@ -1,6 +1,8 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
+  Building2,
   Users,
   Shield,
   Clipboard,
@@ -21,27 +23,33 @@ import {
 export default function Sidebar({
   isCollapsed,
   setIsCollapsed,
-  activeTab,
-  setActiveTab,
   isDarkMode,
   setIsDarkMode,
 }) {
   const menuItems = [
-    { id: 'dashboard', name: 'Overview', icon: LayoutDashboard },
-    { id: 'users', name: 'Staff Management', icon: Users },
-    { id: 'roles', name: 'Role Management', icon: Shield },
-    { id: 'forms', name: 'Form Elements', icon: Clipboard },
-    { id: 'overlays', name: 'Drawer & Modals', icon: Layers },
-    { id: 'toasts', name: 'Toast Alerts', icon: Bell },
-    { id: 'permission', name: 'No Permission', icon: Lock },
-    { id: 'errors', name: 'Error Pages', icon: AlertTriangle },
-    { id: 'login', name: 'Login Screen', icon: Key },
+    { path: '/', end: true, name: 'Dashbaord', icon: LayoutDashboard },
+    { path: '/organizations', name: 'Org', icon: Building2 },
+    { path: '/users', name: 'My Team', icon: Users },
+    { path: '/roles', name: 'Role Management', icon: Shield },
+    // { path: '/forms', name: 'Form Elements', icon: Clipboard },
+    // { path: '/overlays', name: 'Drawer & Modals', icon: Layers },
+    // { path: '/toasts', name: 'Toast Alerts', icon: Bell },
+    // { path: '/permission', name: 'No Permission', icon: Lock },
+    // { path: '/errors', name: 'Error Pages', icon: AlertTriangle },
+    { path: '/login', name: 'Login Screen', icon: Key },
   ];
 
   const subItems = [
-    { id: 'settings', name: 'Settings', icon: Settings },
-    { id: 'help', name: 'Docs & Help', icon: HelpCircle },
+    { path: '/settings', name: 'Settings', icon: Settings },
+    { path: '/help', name: 'Docs & Help', icon: HelpCircle },
   ];
+
+  const linkClasses = ({ isActive }) =>
+    `w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 group relative ${
+      isActive
+        ? 'bg-white/15 text-white'
+        : 'text-white/65 hover:bg-white/10 hover:text-white'
+    }`;
 
   return (
     <aside
@@ -76,17 +84,9 @@ export default function Sidebar({
           <ul className="space-y-1.5">
             {menuItems.map((item) => {
               const Icon = item.icon;
-              const isActive = activeTab === item.id;
               return (
-                <li key={item.id}>
-                  <button
-                    onClick={() => setActiveTab(item.id)}
-                    className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 group relative ${
-                      isActive
-                        ? 'bg-white/15 text-white'
-                        : 'text-white/65 hover:bg-white/10 hover:text-white'
-                    }`}
-                  >
+                <li key={item.path}>
+                  <NavLink to={item.path} end={item.end} className={linkClasses}>
                     <Icon className="w-5 h-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-105" />
                     {!isCollapsed && (
                       <span className="whitespace-nowrap truncate">{item.name}</span>
@@ -97,7 +97,7 @@ export default function Sidebar({
                         {item.name}
                       </span>
                     )}
-                  </button>
+                  </NavLink>
                 </li>
               );
             })}
@@ -114,17 +114,9 @@ export default function Sidebar({
           <ul className="space-y-1.5">
             {subItems.map((item) => {
               const Icon = item.icon;
-              const isActive = activeTab === item.id;
               return (
-                <li key={item.id}>
-                  <button
-                    onClick={() => setActiveTab(item.id)}
-                    className={`w-full flex items-center gap-3.5 px-3.5 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 group relative ${
-                      isActive
-                        ? 'bg-white/15 text-white'
-                        : 'text-white/65 hover:bg-white/10 hover:text-white'
-                    }`}
-                  >
+                <li key={item.path}>
+                  <NavLink to={item.path} className={linkClasses}>
                     <Icon className="w-5 h-5 flex-shrink-0 transition-transform duration-200 group-hover:scale-105" />
                     {!isCollapsed && (
                       <span className="whitespace-nowrap truncate">{item.name}</span>
@@ -134,7 +126,7 @@ export default function Sidebar({
                         {item.name}
                       </span>
                     )}
-                  </button>
+                  </NavLink>
                 </li>
               );
             })}

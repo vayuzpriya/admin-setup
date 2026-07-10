@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { AlertTriangle } from 'lucide-react';
 import Modal from './Modal';
 import Button from './Button';
@@ -12,7 +12,20 @@ export default function ConfirmationDialog({
   confirmLabel = 'Delete Record',
   cancelLabel = 'Cancel',
   isLoading = false,
+  confirmationText,
+  confirmationLabel,
+  confirmationPlaceholder,
 }) {
+  const [typedValue, setTypedValue] = useState('');
+
+  useEffect(() => {
+    if (isOpen) setTypedValue('');
+  }, [isOpen]);
+
+  const isMatch =
+    !confirmationText ||
+    typedValue.trim().toLowerCase() === confirmationText.trim().toLowerCase();
+
   return (
     <Modal
       isOpen={isOpen}
@@ -24,7 +37,7 @@ export default function ConfirmationDialog({
           <Button variant="outline" onClick={onClose} disabled={isLoading}>
             {cancelLabel}
           </Button>
-          <Button variant="danger" onClick={onConfirm} isLoading={isLoading}>
+          <Button variant="danger" onClick={onConfirm} isLoading={isLoading} disabled={isLoading || !isMatch}>
             {confirmLabel}
           </Button>
         </div>
@@ -43,6 +56,21 @@ export default function ConfirmationDialog({
           </p>
         </div>
       </div>
+
+      {confirmationText && (
+        <div className="mt-4 space-y-1.5">
+          <label className="text-xs font-semibold text-[var(--text-label)] uppercase tracking-wider block">
+            {confirmationLabel || `Type "${confirmationText}" to confirm`}
+          </label>
+          <input
+            type="text"
+            value={typedValue}
+            onChange={(e) => setTypedValue(e.target.value)}
+            placeholder={confirmationPlaceholder || confirmationText}
+            className="w-full h-10 px-3.5 text-sm rounded-xl border border-[var(--border-color)] bg-[var(--bg-surface)] transition-all focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] text-[var(--text-primary)]"
+          />
+        </div>
+      )}
     </Modal>
   );
 }

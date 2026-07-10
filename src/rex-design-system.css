@@ -1363,56 +1363,7 @@ button { cursor: pointer; }
   background: rgba(255, 255, 255, 0.05);
 }
 
-
-
-
-  .theme-root {
-    font-family: inherit;
-  }
-  .page-bg {
-    background-color: var(--bg-page);
-  }
-  .surface {
-    background-color: var(--bg-surface);
-  }
-  .surface-2 {
-    background-color: var(--bg-surface-2);
-  }
-  .text-primary {
-    color: var(--text-primary);
-  }
-  .text-secondary {
-    color: var(--text-secondary);
-  }
-  .text-muted {
-    color: var(--text-muted);
-  }
-  .border-primary {
-    border-color: var(--color-primary);
-  }
-  .active-choice {
-    background: white;
-    color: var(--text-heading);
-    font-weight: 600;
-    border: 1px solid var(--color-primary);
-  }
-  .template-active {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 1px var(--color-primary);
-  }
-  input::placeholder,
-  textarea::placeholder {
-    color: var(--text-muted);
-  }
-  input{
-    height: 40px;
-  }
-
-
-  button{
-    cursor: pointer;
-  }
 :focus-visible {
-    outline: none !important;
-    border: 1px solid var(--color-primary) !important;
+  outline: none !important;
+  border: 1px solid var(--color-primary) !important;
 }
